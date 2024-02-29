@@ -206,7 +206,7 @@ export default function UserRentPaymentsHistory() {
             ))
           )}
 
-          {!isLoading && dataFiltered.length && filterStatus !== 'Payment History' ? (
+          {!isLoading && filterStatus !== 'Payment History' ? (
             <Grid item xs={12}>
               <Card sx={{ backgroundColor: 'purple' }}>
                 <Box
@@ -220,7 +220,7 @@ export default function UserRentPaymentsHistory() {
                   {filterStatus === 'Rent Payments' ? (
                     <>
                       <Typography variant="h6">
-                        {fCurrency(userDetails?.user?.accountBalance || 0)} AED
+                        {fCurrency(userDetails?.user?.accountBalance) || 0} AED
                       </Typography>
 
                       <Button
@@ -237,7 +237,9 @@ export default function UserRentPaymentsHistory() {
                   )}
                   {filterStatus === 'Roomy Pay' ? (
                     <>
-                      <Typography variant="h6">{selectedRoomyPayAmount}</Typography>
+                      <Typography variant="h6">
+                        {fCurrency(selectedRoomyPayAmount) || 0} AED
+                      </Typography>
                       <Button
                         size="small"
                         variant="contained"
