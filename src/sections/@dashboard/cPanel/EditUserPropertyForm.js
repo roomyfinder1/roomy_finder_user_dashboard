@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
@@ -22,23 +22,10 @@ import FormProvider, {
   RHFLocationAutoComplete,
 } from '../../../components/hook-form';
 
-import {
-  citydata,
-  dubai,
-  abuDahbi,
-  sharjah,
-  rasAlkima,
-  ummAlQuwain,
-  ajman,
-  mecca,
-  riyadh,
-} from '../../../utils/AllCitiesData';
 import { storage } from '../../../firebase/index';
 import axiosInstance from '../../../utils/axios';
-import { useDispatch } from '../../../redux/store';
 import { API_URL } from '../../../config-global';
 import Iconify from '../../../components/iconify';
-import LOcationAutocomplete from '../../../utils/LocationAutocomplete';
 
 // ----------------------------------------------------------------------
 
@@ -101,10 +88,6 @@ EditUserPropertyForm.propTypes = {
 
 export default function EditUserPropertyForm({ isEdit, currentProduct, userData }) {
   const navigate = useNavigate();
-
-  const dispatch = useDispatch();
-
-  const [locationData, setLocationData] = useState([]);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -292,31 +275,6 @@ export default function EditUserPropertyForm({ isEdit, currentProduct, userData 
   const handleRemoveAllFiles = () => {
     setValue('images', []);
   };
-
-  useEffect(() => {
-    const viewArrayData = () => {
-      if (values.city === 'Dubai') {
-        setLocationData(dubai);
-      } else if (values.city === 'Abu Dhabi') {
-        setLocationData(abuDahbi);
-      } else if (values.city === 'Sharjah') {
-        setLocationData(sharjah);
-      } else if (values.city === 'Ras Al Kima') {
-        setLocationData(rasAlkima);
-      } else if (values.city === 'Umm Al-Quwain') {
-        setLocationData(ummAlQuwain);
-      } else if (values.city === 'Ajman') {
-        setLocationData(ajman);
-      } else if (values.city === 'Riyadh') {
-        setLocationData(riyadh);
-      } else if (values.city === 'Mecca') {
-        setLocationData(mecca);
-      } else {
-        setLocationData([]);
-      }
-    };
-    viewArrayData();
-  }, [values.city]);
 
   // Handle checkbox changes
   const handleAmenityChange = (amenity) => {

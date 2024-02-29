@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { useCallback, useMemo } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // form
 import { useForm } from 'react-hook-form';
@@ -37,7 +37,6 @@ import { nationalities } from '../../../utils/AllNationalitiesData';
 export default function UserNewEditForm() {
   const navigate = useNavigate();
 
-  const { userId } = useParams();
   const { state } = useLocation();
   const user = state;
 
@@ -110,7 +109,7 @@ export default function UserNewEditForm() {
           nationality: values.nationality,
         },
       };
-      const response = await axiosInstance.put(`${API_URL}/c_panel/user_edit/${userId}`, obj);
+      const response = await axiosInstance.put(`${API_URL}/c_panel/user_edit/user`, obj);
 
       if (response.status === 201) {
         reset();
