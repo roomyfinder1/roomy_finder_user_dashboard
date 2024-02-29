@@ -103,9 +103,9 @@ export default function UserPosts() {
 
   useEffect(() => {
     if (userPosts.length > 0) {
-      getPostsData(userPosts);
+      getPostsData([...userPosts, ...userMembershipPosts]);
     }
-  }, [userPosts]);
+  }, [userPosts, userMembershipPosts]);
 
   useEffect(() => {
     dispatch(getUserPosts(userId));
