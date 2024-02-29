@@ -16,6 +16,7 @@ const initialState = {
   unitBookings: [],
   userBookings: [],
   userPosts: [],
+  userMembershipPosts: [],
   userNotifications: [],
   userRoomyPay: null,
   userRentPayments: null,
@@ -104,6 +105,12 @@ const slice = createSlice({
     getUserPostsSuccess(state, action) {
       state.isLoading = false;
       state.userPosts = action.payload;
+    },
+
+    // GET USER MEMBERSHIP POSTS
+    getUserMembershipPostsSuccess(state, action) {
+      state.isLoading = false;
+      state.userMembershipPosts = action.payload;
     },
 
     // GET USER NOTIFICATIONS
@@ -271,6 +278,18 @@ export function getUserPosts(userId) {
     try {
       const response = await axios.get(`${API_URL}/c_panel/user_posts/user`);
       dispatch(slice.actions.getUserPostsSuccess(response.data));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+export function getUserMembershipPosts(userId) {
+  return async (dispatch) => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await axios.get(`${API_URL}/c_panel/user_membership_posts/user`);
+      dispatch(slice.actions.getUserMembershipPostsSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }

@@ -368,7 +368,7 @@ export default function EditUserPropertyForm({ isEdit, currentProduct, userData 
                   <Grid item xs={12} sm={6}>
                     <RHFSelect
                       native
-                      disabled={currentProduct?.haveDifferentUnitPrices || false}
+                      disabled={currentProduct?.type !== 'Mix' || false}
                       name={`units[${index}].type`}
                       label="Unit Type"
                       placeholder="Unit Type"

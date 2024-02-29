@@ -19,7 +19,7 @@ import {
 import { LoadingSkeleton } from '../../../components/loading-screen';
 import { useSettingsContext } from '../../../components/settings';
 import { useDispatch, useSelector } from '../../../redux/store';
-import { getUserPosts } from '../../../redux/slices/userCPanel';
+import { getUserPosts, getUserMembershipPosts } from '../../../redux/slices/userCPanel';
 import { LoadingSection } from '../../../components/loading';
 import {
   TableEmptyRows,
@@ -64,7 +64,7 @@ export default function UserPosts() {
   const { userId } = useParams();
   const { themeStretch } = useSettingsContext();
 
-  const { userPosts, isLoading } = useSelector((store) => store.userCPanel);
+  const { userMembershipPosts, userPosts, isLoading } = useSelector((store) => store.userCPanel);
   const [postsData, setPostsData] = useState(defaultValues);
 
   const getPostsData = (posts) => {
@@ -109,6 +109,7 @@ export default function UserPosts() {
 
   useEffect(() => {
     dispatch(getUserPosts(userId));
+    dispatch(getUserMembershipPosts(userId));
   }, [dispatch, userId]);
 
   return (
@@ -146,7 +147,7 @@ export default function UserPosts() {
           <Grid item xs={12}>
             <PostsTable
               title="Membership Posts"
-              data={[]}
+              data={userMembershipPosts}
               TABLE_HEAD={MEMBERSHIP_POST_TABLE_HEAD}
               loading={isLoading}
             />
