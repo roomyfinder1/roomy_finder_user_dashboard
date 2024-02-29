@@ -19,9 +19,6 @@ const initialState = {
   onToggleDirection: () => {},
   onChangeDirection: () => {},
   onChangeDirectionByLang: () => {},
-  // Layout
-  onToggleLayout: () => {},
-  onChangeLayout: () => {},
   // Contrast
   onToggleContrast: () => {},
   onChangeContrast: () => {},
@@ -105,20 +102,6 @@ export function SettingsProvider({ children }) {
     [setSettings, settings]
   );
 
-  // Layout
-  const onToggleLayout = useCallback(() => {
-    const themeLayout = settings.themeLayout === 'vertical' ? 'mini' : 'vertical';
-    setSettings({ ...settings, themeLayout });
-  }, [setSettings, settings]);
-
-  const onChangeLayout = useCallback(
-    (event) => {
-      const themeLayout = event.target.value;
-      setSettings({ ...settings, themeLayout });
-    },
-    [setSettings, settings]
-  );
-
   // Contrast
   const onToggleContrast = useCallback(() => {
     const themeContrast = settings.themeContrast === 'default' ? 'bold' : 'default';
@@ -163,9 +146,6 @@ export function SettingsProvider({ children }) {
       onToggleDirection,
       onChangeDirection,
       onChangeDirectionByLang,
-      // Layout
-      onToggleLayout,
-      onChangeLayout,
       // Contrast
       onChangeContrast,
       onToggleContrast,
@@ -187,9 +167,6 @@ export function SettingsProvider({ children }) {
       onToggleDirection,
       onChangeDirection,
       onChangeDirectionByLang,
-      // Layout
-      onToggleLayout,
-      onChangeLayout,
       onChangeContrast,
       // Contrast
       onToggleContrast,

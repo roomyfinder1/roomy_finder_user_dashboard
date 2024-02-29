@@ -16,8 +16,7 @@ import Block from './Block';
 import BadgeDot from './BadgeDot';
 import ToggleButton from './ToggleButton';
 import ModeOptions from './ModeOptions';
-import LayoutOptions from './LayoutOptions';
-import StretchOptions from './StretchOptions';
+
 import ContrastOptions from './ContrastOptions';
 import DirectionOptions from './DirectionOptions';
 import FullScreenOptions from './FullScreenOptions';
@@ -115,14 +114,6 @@ export default function SettingsDrawer() {
 
           <Block title="Direction">
             <DirectionOptions />
-          </Block>
-
-          <Block title="Layout">
-            <LayoutOptions />
-          </Block>
-
-          <Block title="Stretch" tooltip="Only available at large resolutions > 1600px (xl)">
-            <StretchOptions />
           </Block>
 
           <Block title="Presets">
