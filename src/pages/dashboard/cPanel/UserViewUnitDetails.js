@@ -67,10 +67,12 @@ export default function UserViewUnitDetails() {
 
   const { unitBookings, isLoading } = useSelector((store) => store.userCPanel);
   const d = new Date(new Date().getYear(), new Date().getMonth() + 1, 0);
-  const [monthBookingsDays, setMonthBookingsDays] = useState({
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const defaultMonthDays = {
     available: d.getDate(),
     booked: 0,
-  });
+  };
+  const [monthBookingsDays, setMonthBookingsDays] = useState(defaultMonthDays);
   const [unitBookingIncome, setUnitBookingIncome] = useState(0);
   const [monthUnitBookings, setMonthUnitBookings] = useState(0);
 
@@ -146,12 +148,12 @@ export default function UserViewUnitDetails() {
   }, [dispatch, property, unit]);
 
   useEffect(() => {
-    if (unitBookings.length) {
-      setUnitBookingIncome(calculateMonthIncome(unitBookings));
-      setMonthBookingsDays(calculateBookingDays(unitBookings));
-      setMonthUnitBookings(getThisMonthBookingsCount(unitBookings));
-    }
-  }, [unitBookings]);
+    setUnitBookingIncome(unitBookings.length ? calculateMonthIncome(unitBookings) : 0);
+    setMonthBookingsDays(
+      unitBookings.length ? calculateBookingDays(unitBookings) : defaultMonthDays
+    );
+    setMonthUnitBookings(unitBookings.length ? getThisMonthBookingsCount(unitBookings) : 0);
+  }, [defaultMonthDays, unitBookings]);
 
   return (
     <>

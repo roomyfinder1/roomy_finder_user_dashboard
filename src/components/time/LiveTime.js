@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Card, Typography } from '@mui/material';
-import { fDateTime } from '../../utils/formatTime';
+import { fDateTimeSeconds } from '../../utils/formatTime';
 
 export default function CurrentTime() {
   const [time, setTime] = useState(new Date());
@@ -13,7 +13,9 @@ export default function CurrentTime() {
 
   return (
     <Card sx={{ padding: 2 }}>
-      <Typography sx={{ whiteSpace: 'nowrap', textAlign: 'center' }}>{fDateTime(time)}</Typography>
+      <Typography sx={{ whiteSpace: 'nowrap', textAlign: 'center' }}>
+        {fDateTimeSeconds(time)}
+      </Typography>
     </Card>
   );
 }

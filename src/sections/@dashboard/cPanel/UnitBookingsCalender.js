@@ -72,17 +72,8 @@ export default function UnitBookingCalenderWithLineStrikeOut({ bookings, month }
           (range, index) =>
             `.selected-ranges-${index} {
             position: relative;
-          }
-          .selected-ranges-${index}::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            width: 100%;
-            height: 4px; /* Increase thickness */
             background-color: red;
-            opacity:0.4;
-
+            color: white;
           }`
         )}
       </style>

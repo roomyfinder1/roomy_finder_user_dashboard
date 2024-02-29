@@ -19,6 +19,12 @@ export function fDateTime(date, newFormat) {
   return date ? format(new Date(date), fm) : '';
 }
 
+export function fDateTimeSeconds(date, newFormat) {
+  const fm = newFormat || 'dd MMM yyyy hh:mm:ss a';
+
+  return date ? format(new Date(date), fm) : '';
+}
+
 export function fTimestamp(date) {
   return date ? getTime(new Date(date)) : '';
 }
