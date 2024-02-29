@@ -134,8 +134,8 @@ export default function UserRentPaymentsHistory() {
         `${API_URL}/roomy_pay/stripe/create-pay-roomy-balance-checkout-session/${userId}`,
         {
           bookingIds,
-          successUrl: `${HOST_API_KEY}/dashboard/c_panel/user_payments/${userId}/Roomy%20Pay`,
-          cancelUrl: `${HOST_API_KEY}/dashboard/c_panel/user_payments/${userId}/Roomy%20Pay`,
+          successUrl: `${HOST_API_KEY}/dashboard/user_payments/${userId}/Roomy%20Pay`,
+          cancelUrl: `${HOST_API_KEY}/dashboard/user_payments/${userId}/Roomy%20Pay`,
         }
       );
       window.location.href = response.data.paymentUrl;

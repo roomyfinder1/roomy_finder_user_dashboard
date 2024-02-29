@@ -3,7 +3,8 @@ import { PATH_DASHBOARD } from './routes/paths';
 
 // ----------------------------------------------------------------------
 
-export const HOST_API_KEY = process.env.REACT_APP_HOST_API_KEY || '';
+export const HOST_API_KEY =
+  process.env.REACT_APP_HOST_API_KEY || 'https://roomy-finder-user-dashboard.vercel.app/';
 export const SERVER_URL =
   process.env.REACT_APP_SERVER_URL || 'wss://roomy-finder-app.ap-1.evennode.com';
 
