@@ -25,6 +25,7 @@ export default function ProductDetailsSummary({ product, ...other }) {
     address,
     preferences,
     amenities,
+    viewCounts,
   } = product;
 
   return (
@@ -76,6 +77,10 @@ export default function ProductDetailsSummary({ product, ...other }) {
               <Typography variant="body2">{units?.length || 'N/A'} units</Typography>
             </Box>
           )}
+          <Box sx={{ mx: 2, my: 1, display: 'flex', justifyContent: 'space-between' }}>
+            <Typography variant="body2">Views</Typography>
+            <Typography variant="body2">{viewCounts || 'N/A'} users</Typography>
+          </Box>
 
           <Typography>{!action ? 'Property Address' : 'Tenant Address'}</Typography>
 
