@@ -142,7 +142,7 @@ export default function UserViewPropertyDetails() {
               <LiveTime />
             </Grid>
 
-            <Grid item container xs={12} md={4} spacing={3}>
+            <Grid item container xs={12} md={4} spacing={3} sx={{ height: 440 }}>
               <Grid item container xs={12} md={8} spacing={3}>
                 <Grid item xs={6}>
                   <Card sx={{ padding: 2, background: '#BD02FE', height: '100%' }}>

@@ -175,7 +175,7 @@ export function PropertyCard({ property, onEditClick, onDeleteClick }) {
       </Box>
       <Image sx={{ borderRadius: 1.5 }} alt="property" src={property.images[0]} ratio="3/4" />
       <Typography sx={{ my: 1 }}>{property.standardCode}</Typography>
-      <Stack direction="row" justifyContent="space-between">
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Button
           variant="contained"
           onClick={() =>
@@ -186,6 +186,7 @@ export function PropertyCard({ property, onEditClick, onDeleteClick }) {
         >
           Edit
         </Button>
+        <Typography>Views: {property?.viewCounts || 0}</Typography>
         <Button
           variant="contained"
           color="secondary"
