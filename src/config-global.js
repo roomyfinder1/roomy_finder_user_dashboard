@@ -39,7 +39,7 @@ export const PATH_AFTER_USER_LOGIN = PATH_DASHBOARD.c_panel.user_profile;
 export const LOCAL_API_URL = 'http://localhost:3001/api/v1/admin';
 // export const API_URL = 'http://localhost:3001/api/v1/admin';
 // export const API_URL = 'https://gsccontrolpanelbackend.onrender.com/api/v1/admin';
-export const API_URL = 'https://roomy-finder-dev-crm.onrender.com/api/v1/admin';
+export const API_URL = 'https://roomy-finder-crm-backend.onrender.com/api/v1/admin';
 // export const API_URL = process.env.REACT_APP_BACKEND_URL;
 // export const API_URL = process.env.REACT_APP_BACKEND_URL;
 
