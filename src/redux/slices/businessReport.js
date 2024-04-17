@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 // utils
 import axios from '../../utils/axios';
-import { LOCAL_API_URL,  } from '../../config-global';
+import { API_URL } from '../../config-global';
 
 // ----------------------------------------------------------------------
 
@@ -51,7 +51,7 @@ export function getTenantBusinessData(userId) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get(`${LOCAL_API_URL}/c_panel/tenant_business_report/user`);
+      const response = await axios.get(`${API_URL}/c_panel/tenant_business_report/user`);
       dispatch(slice.actions.getTenantBusinessDataSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
@@ -63,7 +63,7 @@ export function getCompetitorBusinessData(userId) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get(`${LOCAL_API_URL}/c_panel/competitor_business_report/user`);
+      const response = await axios.get(`${API_URL}/c_panel/competitor_business_report/user`);
       dispatch(slice.actions.getCompetitorBusinessDataSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
