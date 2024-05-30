@@ -67,7 +67,7 @@ export const CPanelUserMaintenanceDetails = Loadable(
   lazy(() => import('../pages/dashboard/cPanel/UserMaintenanceDetails'))
 );
 export const CPanelUserBusinessReport = Loadable(
-  lazy(() => import('../pages/dashboard/cPanel/UserBusinessReport'))
+  lazy(() => import('../pages/dashboard/cPanel/UserBusinessReportV2'))
 );
 export const CPanelUserBookings = Loadable(
   lazy(() => import('../pages/dashboard/cPanel/UserBookings'))
@@ -87,4 +87,8 @@ export const CPanelUserEditProfile = Loadable(
 );
 export const CPanelUserNotifications = Loadable(
   lazy(() => import('../pages/dashboard/cPanel/UserNotifications'))
+);
+
+export const AreaBusinessReport = Loadable(
+  lazy(() => import('../pages/dashboard/cPanel/TenantAreaBusinessReport'))
 );

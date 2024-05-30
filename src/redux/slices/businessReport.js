@@ -9,6 +9,7 @@ const initialState = {
   isLoading: true,
   error: null,
   tenantBusinessReport: {},
+  tenantAreaBusinessReport: {},
   competitorBusinessReport: {},
   membershipsLoading: false,
 };
@@ -34,6 +35,12 @@ const slice = createSlice({
       state.tenantBusinessReport = action.payload;
     },
 
+    // GET Tenant AREA Business report
+    getTenantAreaBusinessDataSuccess(state, action) {
+      state.isLoading = false;
+      state.tenantAreaBusinessReport = action.payload;
+    },
+
     // GET Competitor business report
     getCompetitorBusinessDataSuccess(state, action) {
       state.isLoading = false;
@@ -51,8 +58,22 @@ export function getTenantBusinessData(userId) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get(`${API_URL}/c_panel/tenant_business_report/user`);
+      const response = await axios.get(`${API_URL}/c_panel/tenant_business_report/${userId}`);
       dispatch(slice.actions.getTenantBusinessDataSuccess(response.data));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+export function getTenantAreaBusinessData(userId, area) {
+  return async (dispatch) => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await axios.get(
+        `${API_URL}/c_panel/tenant_area_business_report/${userId}/${area}`
+      );
+      dispatch(slice.actions.getTenantAreaBusinessDataSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
@@ -63,7 +84,7 @@ export function getCompetitorBusinessData(userId) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get(`${API_URL}/c_panel/competitor_business_report/user`);
+      const response = await axios.get(`${API_URL}/c_panel/competitor_business_report/${userId}`);
       dispatch(slice.actions.getCompetitorBusinessDataSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));

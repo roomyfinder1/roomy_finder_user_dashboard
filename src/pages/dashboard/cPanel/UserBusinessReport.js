@@ -41,12 +41,10 @@ export default function UserBusinessReport() {
 
   const dispatch = useDispatch();
 
-  const { userId } = useParams();
-
   useEffect(() => {
-    dispatch(getTenantBusinessData(userId));
-    dispatch(getCompetitorBusinessData(userId));
-  }, [dispatch, userId]);
+    dispatch(getTenantBusinessData('user'));
+    dispatch(getCompetitorBusinessData('user'));
+  }, [dispatch]);
 
   useEffect(() => {
     const cities = Object.keys(competitorBusinessReport);
