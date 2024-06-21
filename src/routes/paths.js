@@ -51,5 +51,6 @@ export const PATH_DASHBOARD = {
     user_edit_profile: path(ROOTS_DASHBOARD, `/user_edit_profile`), // it needs to pass userId as params
     user_notifications: path(ROOTS_DASHBOARD, `/user_notifications`), // it needs to pass userId as params
     profile: path(ROOTS_DASHBOARD, `/profile`), // it needs to pass userId as params
+    area_business_report: (area) => path(ROOTS_DASHBOARD, `/area_business_report/user/${area}`), // it needs to pass userId as params
   },
 };

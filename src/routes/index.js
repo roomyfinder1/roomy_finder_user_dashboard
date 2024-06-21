@@ -42,6 +42,7 @@ import {
   CPanelUserPayments,
   CPanelUserEditProperty,
   CPanelUserViewPost,
+  AreaBusinessReport,
 } from './elements';
 
 // ----------------------------------------------------------------------
@@ -276,6 +277,14 @@ export default function Router() {
           element: (
             <AuthGuard allowedUserTypes={[...onlyForLandlord]}>
               <CPanelUserNotifications />
+            </AuthGuard>
+          ),
+        },
+        {
+          path: 'area_business_report/user/:area',
+          element: (
+            <AuthGuard allowedUserTypes={[...onlyForLandlord]}>
+              <AreaBusinessReport />
             </AuthGuard>
           ),
         },

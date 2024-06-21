@@ -62,6 +62,7 @@ export default function CustomerCityInformation({ data }) {
           </Box>
         </Grid>
       ))}
+
       {!Object.keys(data).length && (
         <Grid item xs={12}>
           <NoData />

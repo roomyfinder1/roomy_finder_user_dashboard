@@ -80,7 +80,9 @@ const slice = createSlice({
     // GET USER PROPERTIES
     getUserPropertiesSuccess(state, action) {
       state.isLoading = false;
-      state.userProperties = action.payload;
+      const data = action.payload;
+      const properties = data.filter((d) => !d.isDeleted);
+      state.userProperties = properties;
     },
 
     // GET PROPERTY DETAILS
@@ -227,6 +229,7 @@ export function getUserProperties(userId) {
     dispatch(slice.actions.startLoading());
     try {
       const response = await axios.get(`${API_URL}/c_panel/user_properties/user`);
+
       dispatch(slice.actions.getUserPropertiesSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
