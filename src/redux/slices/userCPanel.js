@@ -81,7 +81,7 @@ const slice = createSlice({
     getUserPropertiesSuccess(state, action) {
       state.isLoading = false;
       const data = action.payload;
-      const properties = data.filter((d) => d.isDeleted);
+      const properties = data.filter((d) => !d.isDeleted);
       state.userProperties = properties;
     },
 
