@@ -219,7 +219,7 @@ export default function UserRentPaymentsHistory() {
                 >
                   {filterStatus === 'Rent Payments' ? (
                     <>
-                      <Typography variant="h6">
+                      <Typography variant="h6" sx={{ color: '#fff' }}>
                         {fCurrency(userDetails?.user?.accountBalance) || 0} AED
                       </Typography>
 
@@ -237,7 +237,7 @@ export default function UserRentPaymentsHistory() {
                   )}
                   {filterStatus === 'Roomy Pay' ? (
                     <>
-                      <Typography variant="h6">
+                      <Typography variant="h6" sx={{ color: '#fff' }}>
                         {fCurrency(selectedRoomyPayAmount) || 0} AED
                       </Typography>
                       <Button

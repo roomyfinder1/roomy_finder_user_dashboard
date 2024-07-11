@@ -29,6 +29,7 @@ export default function ProfileCover({ user }) {
   // const { handlePrintWithToast, componentRef } = usePrintPdf();
 
   const handleUserEditProfile = async () => {
+    console.log('edit');
     navigate(PATH_DASHBOARD.c_panel.user_edit_profile, { state: user });
   };
 

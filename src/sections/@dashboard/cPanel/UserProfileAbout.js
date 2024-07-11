@@ -148,21 +148,8 @@ export default function UserProfileAbout({ loading, user, properties }) {
             onClick={handleServiceClick}
             fullWidth
           >
-            <Stack direction="row">
-              <StyledImage src={freeOffers} />
-              <Typography>Services</Typography>
-
-              <Menu
-                anchorEl={anchorServiceEl}
-                open={Boolean(anchorServiceEl)}
-                onClose={handleServiceClose}
-              >
-                <MenuItem onClick={handleUserTenantChat}>Tenant Chat</MenuItem>
-                <MenuItem onClick={handleUserPosts}>Posts</MenuItem>
-                <MenuItem onClick={handleUserMaintenance}>Maintenances</MenuItem>
-                <MenuItem onClick={handleUserBusinessReport}>Business Report</MenuItem>
-              </Menu>
-            </Stack>
+            <StyledImage src={freeOffers} />
+            <Typography>Services</Typography>
           </Button>
         </Grid>
         <Grid item xs={12} sm={4} md={3} sx={{ padding: 2 }}>
@@ -201,22 +188,20 @@ export default function UserProfileAbout({ loading, user, properties }) {
             <Stack direction="row">
               <StyledImage src={payments} />
               <Typography>Payments</Typography>
-
-              <Menu
-                anchorEl={anchorPaymentEl}
-                open={Boolean(anchorPaymentEl)}
-                onClose={handlePaymentClose}
-              >
-                <MenuItem onClick={() => handleUserPayments('Rent Payments')}>
-                  Rent Payment
-                </MenuItem>
-                <MenuItem onClick={() => handleUserPayments('Roomy Pay')}>Roomy Pay</MenuItem>
-                <MenuItem onClick={() => handleUserPayments('Payment History')}>
-                  Payment History
-                </MenuItem>
-              </Menu>
             </Stack>
           </Button>
+
+          <Menu
+            anchorEl={anchorPaymentEl}
+            open={Boolean(anchorPaymentEl)}
+            onClose={handlePaymentClose}
+          >
+            <MenuItem onClick={() => handleUserPayments('Rent Payments')}>Rent Payment</MenuItem>
+            <MenuItem onClick={() => handleUserPayments('Roomy Pay')}>Roomy Pay</MenuItem>
+            <MenuItem onClick={() => handleUserPayments('Payment History')}>
+              Payment History
+            </MenuItem>
+          </Menu>
         </Grid>
         <Grid item xs={12} sm={4} md={3} sx={{ padding: 2 }}>
           <Button
