@@ -5,27 +5,27 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // @mui
 import { styled } from '@mui/material/styles';
-import {
-  Button,
-  Card,
-  Typography,
-  CardHeader,
-  Stack,
-  Grid,
-  LinearProgress,
-  Menu,
-  MenuItem,
-} from '@mui/material';
+import { Button, Typography, Stack, Grid, Menu, MenuItem } from '@mui/material';
 // components
-import Iconify from '../../../components/iconify';
 import { PATH_DASHBOARD } from '../../../routes/paths';
-import { fDate } from '../../../utils/formatTime';
+import NewProfileAbout from './NewProfileAbout';
+import Image from '../../../components/image/Image';
+
+// ------------- icons -----------------------------------
+import membership from '../../../assets/category_icons/membership.png';
+import propertyImg from '../../../assets/category_icons/property.png';
+import tenantChat from '../../../assets/category_icons/tenantChat.png';
+import notification from '../../../assets/category_icons/notification.png';
+import booking from '../../../assets/category_icons/booking.png';
+import transaction from '../../../assets/category_icons/transaction.png';
+import payments from '../../../assets/category_icons/payments.png';
+import freeOffers from '../../../assets/category_icons/freeOffers.png';
 
 // ----------------------------------------------------------------------
 
-const StyledIcon = styled(Iconify)(({ theme }) => ({
+const StyledImage = styled(Image)(({ theme }) => ({
   width: 20,
-  height: 20,
+  height: 18,
   marginTop: 1,
   flexShrink: 0,
   marginRight: theme.spacing(2),
@@ -72,9 +72,6 @@ export default function UserProfileAbout({ loading, user, properties }) {
     navigate(PATH_DASHBOARD.c_panel.user_payments(user._id, type));
   };
 
-  const handleUserEditProfile = async () => {
-    navigate(PATH_DASHBOARD.c_panel.user_edit_profile, { state: user });
-  };
   const handleUserNotifications = async () => {
     navigate(PATH_DASHBOARD.c_panel.user_notifications);
   };
@@ -113,120 +110,48 @@ export default function UserProfileAbout({ loading, user, properties }) {
   };
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12} md={10}>
-        {loading ? (
-          <LinearProgress />
-        ) : (
-          <Card>
-            <CardHeader title="About" />
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={6} md={4}>
-                <Stack spacing={2} sx={{ p: 3 }}>
-                  <Typography variant="h6">{user?.standardCode || 'N/A'}</Typography>
-                  <Typography variant="h6">
-                    {user?.firstName} {user?.lastName}
-                  </Typography>
-
-                  <Stack direction="row">
-                    <StyledIcon icon="eva:email-fill" />
-                    <Typography variant="body2">{user?.email}</Typography>
-                  </Stack>
-
-                  <Stack direction="row">
-                    <StyledIcon icon="bi:phone-fill" />
-                    <Typography variant="body2">{user?.phone}</Typography>
-                  </Stack>
-
-                  {/* <Stack direction="row">
-                    <StyledIcon icon="eva:pin-fill" />
-
-                    <Typography variant="body2">
-                      Live at &nbsp;
-                      <Link component="span" variant="subtitle2" color="text.primary">
-                        {user.country}
-                      </Link>
-                    </Typography>
-                  </Stack> */}
-                </Stack>
-              </Grid>
-              <Grid item xs={12} sm={6} md={4}>
-                <Stack spacing={2} sx={{ p: 3 }}>
-                  <Stack direction="row" alignItems="center" spacing={2}>
-                    <Typography variant="body1">Nationality:</Typography>
-                    <Typography variant="body2">{user?.aboutMe?.nationality || 'N/A'}</Typography>
-                  </Stack>
-                  <Stack direction="row" alignItems="center" spacing={2}>
-                    {/* <StyledIcon icon="icons8:gender" /> */}
-                    <Typography variant="body1">Gender:</Typography>
-                    <Typography variant="body2">{user?.gender}</Typography>
-                  </Stack>
-
-                  <Stack direction="row" spacing={2}>
-                    <Typography variant="body1">Location:</Typography>
-                    <Typography variant="body2">
-                      {user?.city}, {user?.country}
-                    </Typography>
-                  </Stack>
-
-                  <Stack direction="row" spacing={2}>
-                    <Typography variant="body1">Number Of Properties:</Typography>
-                    <Typography variant="body2">{properties?.length}</Typography>
-                  </Stack>
-                </Stack>
-              </Grid>
-
-              <Grid item xs={12} sm={6} md={4}>
-                <Stack spacing={2} sx={{ p: 3 }}>
-                  <Stack direction="row" spacing={2}>
-                    <Typography variant="body1">Registered since:</Typography>
-                    <Typography variant="body2">{fDate(user?.createdAt)}</Typography>
-                  </Stack>
-
-                  <Stack direction="row" spacing={2}>
-                    <Typography variant="body1">Membership:</Typography>
-                    <Typography variant="body2">{user?.isPremium ? 'Yes' : 'No'}</Typography>
-                  </Stack>
-                </Stack>
-              </Grid>
-            </Grid>
-          </Card>
-        )}
-      </Grid>
-
-      <Grid item xs={12} md={2}>
-        <Card>
-          <Stack padding={3} spacing={2}>
-            <Button variant="contained" color="error" onClick={handleUserEditProfile}>
-              Edit Profile
-            </Button>
-            <Button variant="contained" color="error" onClick={handleUserNotifications}>
-              Notification
-            </Button>
-            <Button variant="contained" color="error" onClick={handleContactUs}>
-              Contact us
-            </Button>
-          </Stack>
-        </Card>
-      </Grid>
-
+    <Grid container>
       <Grid item xs={12}>
-        <Card>
-          <Grid container spacing={3} padding={3}>
-            <Grid item xs={12} sm={6} md={4}>
-              <Button fullWidth variant="contained" onClick={handleUserMemberships}>
-                Membership
-              </Button>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Button fullWidth variant="contained" onClick={handleUserProperties}>
-                Property
-              </Button>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Button fullWidth variant="contained" onClick={handleServiceClick}>
-                Services
-              </Button>
+        <NewProfileAbout user={user} />
+      </Grid>
+      <Grid item xs={12} container sx={{ border: '2px solid', borderTop: 'none', padding: 2 }}>
+        <Grid item xs={12} sm={4} md={3} sx={{ padding: 2 }}>
+          <Button
+            variant="textVariant"
+            fullWidth
+            sx={{ border: '1px solid' }}
+            onClick={handleUserMemberships}
+          >
+            <Stack direction="row">
+              <StyledImage src={membership} />
+              <Typography>Membership</Typography>
+            </Stack>
+          </Button>
+        </Grid>
+        <Grid item xs={12} sm={4} md={3} sx={{ padding: 2 }}>
+          <Button
+            variant="textVariant"
+            sx={{ border: '1px solid' }}
+            fullWidth
+            onClick={handleUserProperties}
+          >
+            <Stack direction="row">
+              <StyledImage src={propertyImg} />
+              <Typography>Property</Typography>
+            </Stack>
+          </Button>
+        </Grid>
+        <Grid item xs={12} sm={4} md={3} sx={{ padding: 2 }}>
+          <Button
+            variant="textVariant"
+            sx={{ border: '1px solid' }}
+            onClick={handleServiceClick}
+            fullWidth
+          >
+            <Stack direction="row">
+              <StyledImage src={freeOffers} />
+              <Typography>Services</Typography>
+
               <Menu
                 anchorEl={anchorServiceEl}
                 open={Boolean(anchorServiceEl)}
@@ -237,21 +162,46 @@ export default function UserProfileAbout({ loading, user, properties }) {
                 <MenuItem onClick={handleUserMaintenance}>Maintenances</MenuItem>
                 <MenuItem onClick={handleUserBusinessReport}>Business Report</MenuItem>
               </Menu>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Button fullWidth variant="contained" onClick={handleUserBookings}>
-                Booking
-              </Button>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Button fullWidth variant="contained" onClick={handleUserPurchases}>
-                Purchases
-              </Button>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Button fullWidth variant="contained" onClick={handlePaymentClick}>
-                Payment
-              </Button>
+            </Stack>
+          </Button>
+        </Grid>
+        <Grid item xs={12} sm={4} md={3} sx={{ padding: 2 }}>
+          <Button
+            variant="textVariant"
+            sx={{ border: '1px solid' }}
+            fullWidth
+            onClick={handleUserBookings}
+          >
+            <Stack direction="row">
+              <StyledImage src={booking} />
+              <Typography>Bookings</Typography>
+            </Stack>
+          </Button>
+        </Grid>
+        <Grid item xs={12} sm={4} md={3} sx={{ padding: 2 }}>
+          <Button
+            variant="textVariant"
+            sx={{ border: '1px solid' }}
+            fullWidth
+            onClick={handleUserPurchases}
+          >
+            <Stack direction="row">
+              <StyledImage src={transaction} />
+              <Typography>Purchases</Typography>
+            </Stack>
+          </Button>
+        </Grid>
+        <Grid item xs={12} sm={4} md={3} sx={{ padding: 2 }}>
+          <Button
+            variant="textVariant"
+            sx={{ border: '1px solid' }}
+            fullWidth
+            onClick={handlePaymentClick}
+          >
+            <Stack direction="row">
+              <StyledImage src={payments} />
+              <Typography>Payments</Typography>
+
               <Menu
                 anchorEl={anchorPaymentEl}
                 open={Boolean(anchorPaymentEl)}
@@ -265,9 +215,35 @@ export default function UserProfileAbout({ loading, user, properties }) {
                   Payment History
                 </MenuItem>
               </Menu>
-            </Grid>
-          </Grid>
-        </Card>
+            </Stack>
+          </Button>
+        </Grid>
+        <Grid item xs={12} sm={4} md={3} sx={{ padding: 2 }}>
+          <Button
+            variant="textVariant"
+            sx={{ border: '1px solid' }}
+            fullWidth
+            onClick={handleUserNotifications}
+          >
+            <Stack direction="row">
+              <StyledImage src={notification} />
+              <Typography>Notification</Typography>
+            </Stack>
+          </Button>
+        </Grid>
+        <Grid item xs={12} sm={4} md={3} sx={{ padding: 2 }}>
+          <Button
+            variant="textVariant"
+            sx={{ border: '1px solid' }}
+            fullWidth
+            onClick={handleContactUs}
+          >
+            <Stack direction="row">
+              <StyledImage src={tenantChat} />
+              <Typography>Contact Us</Typography>
+            </Stack>
+          </Button>
+        </Grid>
       </Grid>
     </Grid>
   );

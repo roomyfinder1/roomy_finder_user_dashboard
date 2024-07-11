@@ -1,100 +1,87 @@
 import PropTypes from 'prop-types';
+
 // @mui
-import { styled } from '@mui/material/styles';
-import { Box, Typography } from '@mui/material';
+import { alpha, styled } from '@mui/material/styles';
+import { Box, IconButton } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import DownloadIcon from '@mui/icons-material/Download';
+import { useNavigate } from 'react-router-dom';
 // utils
-import { bgBlur } from '../../../../utils/cssStyles';
-// auth
-import { useAuthContext } from '../../../../auth/useAuthContext';
+import { bgGradient } from '../../../../utils/cssStyles';
 // components
-import Image from '../../../../components/image';
-import { CustomAvatar } from '../../../../components/custom-avatar';
+
+import { PATH_DASHBOARD } from '../../../../routes/paths';
+// import LandlordPdf from '../../landlordPdfDownload/LandlordPdf';
+// import usePrintPdf from '../../../../utils/DownloadAsPdf';
+// import { handleDownloadPdf } from '../../../../utils/DownloadAsPdf';
 
 // ----------------------------------------------------------------------
-
-const StyledRoot = styled('div')(({ theme }) => ({
-  '&:before': {
-    ...bgBlur({
-      color: theme.palette.primary.darker,
-    }),
-    top: 0,
-    zIndex: 9,
-    content: "''",
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-  },
-}));
-
-const StyledInfo = styled('div')(({ theme }) => ({
-  left: 0,
-  right: 0,
-  zIndex: 99,
-  position: 'absolute',
-  marginTop: theme.spacing(5),
-  [theme.breakpoints.up('md')]: {
-    right: 'auto',
-    display: 'flex',
-    alignItems: 'center',
-    left: theme.spacing(3),
-    bottom: theme.spacing(3),
-  },
-}));
 
 // ----------------------------------------------------------------------
 
 ProfileCover.propTypes = {
-  cover: PropTypes.string,
-  name: PropTypes.string,
-  role: PropTypes.string,
-  profileUrl: PropTypes.string,
+  user: PropTypes.object,
 };
 
-export default function ProfileCover({ name, role, cover, profileUrl }) {
-  const { user } = useAuthContext();
+export default function ProfileCover({ user }) {
+  const navigate = useNavigate();
+
+  // const { handlePrintWithToast, componentRef } = usePrintPdf();
+
+  const handleUserEditProfile = async () => {
+    navigate(PATH_DASHBOARD.c_panel.user_edit_profile, { state: user });
+  };
+
+  const StyledRoot = styled('div')(() => ({
+    '&:before': {
+      ...bgGradient({
+        direction: '235deg',
+        startColor: `${alpha('#953398', 1)} 0%`,
+        endColor: `${alpha('#953398', 1)} 100%`,
+      }),
+      top: 0,
+      zIndex: 9,
+      content: "''",
+      width: '100%',
+      height: '100%',
+      position: 'absolute',
+    },
+  }));
 
   return (
-    <StyledRoot>
-      <StyledInfo>
-        <CustomAvatar
-          src={profileUrl || user?.photoURL}
-          alt={user?.displayName}
-          name={user?.displayName}
-          sx={{
-            mx: 'auto',
-            borderWidth: 2,
-            borderStyle: 'solid',
-            borderColor: 'common.white',
-            width: { xs: 80, md: 128 },
-            height: { xs: 80, md: 128 },
-          }}
-        />
-
+    <>
+      <StyledRoot sx={{}}>
         <Box
           sx={{
-            ml: { md: 3 },
-            mt: { xs: 1, md: 0 },
-            color: 'common.white',
-            textAlign: { xs: 'center', md: 'left' },
+            position: 'absolute',
+            zIndex: 88,
+            right: 10,
+            top: 5,
+            display: 'flex',
+            gap: 2,
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
-          <Typography variant="h4">{name}</Typography>
-
-          <Typography sx={{ opacity: 0.72 }}>{role}</Typography>
+          {/* {user?.type === 'Landlord' && (
+            <IconButton
+              // onClick={() => handlePrintWithToast('profile-cover', `${user?.fullName} profile`)}
+              sx={{ backgroundColor: '#fff' }}
+            >
+              <DownloadIcon />
+            </IconButton>
+          )} */}
+          <IconButton onClick={handleUserEditProfile} sx={{ backgroundColor: '#fff' }}>
+            <EditIcon />
+          </IconButton>
         </Box>
-      </StyledInfo>
+      </StyledRoot>
 
-      <Image
-        alt="cover"
-        src={cover}
-        sx={{
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          position: 'absolute',
-        }}
-      />
-    </StyledRoot>
+      {/* <div style={{ display: 'none' }}>
+        <div style={{ minWidth: '400px' }} id="profile-cover" ref={componentRef}>
+          <LandlordPdf user={user} bookings={userBookings} transactions={userTransactions} />
+        </div>
+      </div> */}
+    </>
   );
 }

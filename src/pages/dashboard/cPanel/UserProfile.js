@@ -70,29 +70,28 @@ export default function UserProfilePage({ state12 = null }) {
           <CustomBreadcrumbs heading="Profile" links={[{ name: 'User Profile', href: '' }]} />
           <Card
             sx={{
-              mb: 3,
-              height: 280,
+              height: 150,
               position: 'relative',
+              borderRadius: 0,
+              border: '2px solid',
+              borderBottom: 'none',
             }}
           >
-            <ProfileCover
-              name={user ? `${user?.firstName} ${user?.lastName}` : user?.displayName}
-              role={user ? user?.type : _userAbout?.role}
-              cover={_userAbout?.cover}
-              profileUrl={user ? user.profilePicture : null}
-            />
+            <ProfileCover user={user} />
 
             <Tabs
               value={currentTab}
               onChange={(event, newValue) => setCurrentTab(newValue)}
               sx={{
-                width: 1,
-                bottom: 0,
+                // width: 1,
+                bottom: { xs: 'auto', md: 0 }, // Set bottom for medium screens and up
+                top: { xs: 0, md: 'auto' }, // Set top for extra-small screens
                 zIndex: 9,
+                right: { xs: 'auto', md: 0 },
                 position: 'absolute',
-                bgcolor: 'background.paper',
+
                 '& .MuiTabs-flexContainer': {
-                  pr: { md: 3 },
+                  px: { md: 3 },
                   justifyContent: {
                     sm: 'center',
                     md: 'flex-end',

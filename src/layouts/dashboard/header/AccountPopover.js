@@ -95,7 +95,7 @@ export default function AccountPopover() {
       <ConfirmDialog
         open={openConfirm}
         onClose={() => setOpenConfirm(false)}
-        title="Delete"
+        title="Logout"
         content={
           <>
             Are you sure want to <strong> Logout </strong>?
