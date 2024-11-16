@@ -7,8 +7,9 @@ import CustomersPieChart from './components/CustomersPieChart';
 TenantsInformation.propTypes = {
   title: PropTypes.string,
   data: PropTypes.array,
+  obj: PropTypes.object,
 };
-export default function TenantsInformation({ title, data }) {
+export default function TenantsInformation({ title, data, obj = null }) {
   const theme = useTheme();
 
   const { maleCustomers, femaleCustomers } = data;
@@ -22,7 +23,7 @@ export default function TenantsInformation({ title, data }) {
         chart={{
           colors: [theme.palette.info.main, theme.palette.info.light, theme.palette.info.dark],
 
-          series: [
+          series: obj || [
             {
               label: 'Male',
               value: maleCustomers ?? 5,

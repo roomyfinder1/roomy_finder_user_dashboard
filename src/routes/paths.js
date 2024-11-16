@@ -52,5 +52,31 @@ export const PATH_DASHBOARD = {
     user_notifications: path(ROOTS_DASHBOARD, `/user_notifications`), // it needs to pass userId as params
     profile: path(ROOTS_DASHBOARD, `/profile`), // it needs to pass userId as params
     area_business_report: (area) => path(ROOTS_DASHBOARD, `/area_business_report/user/${area}`), // it needs to pass userId as params
+    tenant_area_business_report: (userId, area) =>
+      path(ROOTS_DASHBOARD, `/tenant_area_business_report/${userId}/${area}`), // it needs to pass userId as params
+    compitator_area_business_report: (userId, area) =>
+      path(ROOTS_DASHBOARD, `/compitator_area_business_report/${userId}/${area}`), // it needs to pass userId as params
+
+    user_business_report_landlord: (userId) =>
+      path(ROOTS_DASHBOARD, `/user_business_report/landlord_crm/${userId}`), // it needs to pass userId as params
+    user_business_report_properties_monthly_income: (userId) =>
+      path(ROOTS_DASHBOARD, `/user_business_report/properties_monthly_income/${userId}`), // it needs to pass userId as params
+    user_business_report_landlord_memberships: (userId) =>
+      path(ROOTS_DASHBOARD, `/user_business_report/landlord_memberships/${userId}`), // it needs to pass userId as params
+    user_business_report_landlord_paid_to_roomy: (userId) =>
+      path(ROOTS_DASHBOARD, `/user_business_report/landlord_paid_to_roomy/${userId}`), // it needs to pass userId as params
+    user_business_report_landlord_vat_fee_payment: (userId) =>
+      path(ROOTS_DASHBOARD, `/user_business_report/landlord_vat_fee_payment/${userId}`), // it needs to pass userId as params
+    user_business_report_landlord_maintenance_payments: (userId) =>
+      path(ROOTS_DASHBOARD, `/user_business_report/landlord_maintenance_payments/${userId}`), // it needs to pass userId as params
+    user_business_report_landlord_preferred_payment_method: (userId) =>
+      path(ROOTS_DASHBOARD, `/user_business_report/landlord_preferred_payment_method/${userId}`), // it needs to pass userId as params
+
+    user_business_report_landlord_chat_details: (userId) =>
+      path(ROOTS_DASHBOARD, `/user_business_report/landlord_chat_details/${userId}`), // it needs to pass userId as params
+    user_business_report_matched_tenants: (userId) =>
+      path(ROOTS_DASHBOARD, `/user_business_report/matched_tenants/${userId}`), // it needs to pass userId as params
+    user_business_report_landlord_preferences: (userId) =>
+      path(ROOTS_DASHBOARD, `/user_business_report/landlord_preferences/${userId}`), // it needs to pass userId as params
   },
 };

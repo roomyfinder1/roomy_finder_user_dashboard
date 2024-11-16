@@ -26,7 +26,7 @@ export default function UnitsInformation({ title, data }) {
 
   return (
     <Card sx={{ padding: 2, border: '1px solid #DADADA', height: '100%' }}>
-      <Typography sx={{ color: '#1E01D2', fontWeight: 'bold', paddingX: '30px' }}>
+      <Typography sx={{ color: '#1E01D2', fontWeight: 'bold', paddingX: '30px', mb: '15px' }}>
         {title}
       </Typography>
       <Grid container spacing={3}>

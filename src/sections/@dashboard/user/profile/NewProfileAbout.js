@@ -3,19 +3,19 @@ import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 // @mui
 import { styled } from '@mui/material/styles';
-import { Card, Typography, CardHeader, Stack, Grid, Box } from '@mui/material';
+import { Typography, CardHeader, Stack, Grid, Box } from '@mui/material';
 // components
-import Iconify from '../../../components/iconify';
-import Image from '../../../components/image';
+import Iconify from '../../../../components/iconify';
+import { NotLazyImage } from '../../../../components/image';
 
 // -------------- icons ---------------
-import gender from '../../../assets/profile_icons/gender.png';
-import location from '../../../assets/profile_icons/location.png';
-import createdAt from '../../../assets/profile_icons/createdAt.png';
-import properties from '../../../assets/profile_icons/properties.png';
-import membership from '../../../assets/profile_icons/membership.png';
-import countryImg from '../../../assets/profile_icons/country.png';
-import userAvatar from '../../../assets/icons/user_avatar.webp';
+import gender from '../../../../assets/profile_icons/gender.png';
+import location from '../../../../assets/profile_icons/location.png';
+import createdAt from '../../../../assets/profile_icons/createdAt.png';
+import properties from '../../../../assets/profile_icons/properties.png';
+import membership from '../../../../assets/profile_icons/membership.png';
+import countryImg from '../../../../assets/profile_icons/country.png';
+import userAvatar from '../../../../assets/icons/user_avatar.webp';
 
 const StyledIcon = styled(Iconify)(({ theme }) => ({
   width: 20,
@@ -25,7 +25,7 @@ const StyledIcon = styled(Iconify)(({ theme }) => ({
   marginRight: theme.spacing(2),
 }));
 
-const StyledImage = styled(Image)(({ theme }) => ({
+const StyledImage = styled(NotLazyImage)(({ theme }) => ({
   width: 20,
   height: 18,
   marginTop: 1,
@@ -66,7 +66,7 @@ export default function NewProfileAbout({ user, color }) {
             top: -70,
           }}
         >
-          <Image
+          <NotLazyImage
             alt="cover"
             className="image_component"
             src={user?.profilePicture || userAvatar}

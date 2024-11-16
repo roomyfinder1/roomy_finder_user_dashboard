@@ -24,7 +24,7 @@ import {
   emptyRows,
   useTable,
 } from '../../../components/table';
-import { LoadingSkeleton } from '../../../components/loading-screen';
+import { LoadingSkeleton } from '../../../sections/@dashboard/general/app';
 import { useDispatch, useSelector } from '../../../redux/store';
 import { getUserNotifications } from '../../../redux/slices/userCPanel';
 import { fDateTime } from '../../../utils/formatTime';

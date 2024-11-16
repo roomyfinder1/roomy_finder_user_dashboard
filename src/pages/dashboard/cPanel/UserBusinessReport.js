@@ -8,27 +8,10 @@ import { useSettingsContext } from '../../../components/settings';
 import { useDispatch, useSelector } from '../../../redux/store';
 
 import {
-  CustomerMonthlyGrowth,
-  CustomerCityInformation,
-  CustomerInTheArea,
-  AverageUnitPrice,
-  ClicksPerPost,
-  UnitNumber,
-  PostsNumber,
-  Memberships,
-  CompareClicks,
-  GeneralAmenities,
-  CompareBookings,
-  ComparePrices,
-  CompareDeposits,
-  CompareAgentCommission,
-  PropertiesInArea,
-} from '../../../sections/@dashboard/cPanel/businessReport';
-import {
   getCompetitorBusinessData,
   getTenantBusinessData,
 } from '../../../redux/slices/businessReport';
-import { CardLoading } from '../../../components/loading';
+import ComingSoonPage from '../../ComingSoonPage';
 
 export default function UserBusinessReport() {
   const { themeStretch } = useSettingsContext();
@@ -41,10 +24,12 @@ export default function UserBusinessReport() {
 
   const dispatch = useDispatch();
 
+  const { userId } = useParams();
+
   useEffect(() => {
-    dispatch(getTenantBusinessData('user'));
-    dispatch(getCompetitorBusinessData('user'));
-  }, [dispatch]);
+    dispatch(getTenantBusinessData(userId));
+    dispatch(getCompetitorBusinessData(userId));
+  }, [dispatch, userId]);
 
   useEffect(() => {
     const cities = Object.keys(competitorBusinessReport);
@@ -56,7 +41,8 @@ export default function UserBusinessReport() {
       <Helmet>
         <title> Business Report | CRM </title>
       </Helmet>
-      <Container maxWidth={themeStretch ? false : '90%'}>
+      <ComingSoonPage />
+      {/* <Container maxWidth={themeStretch ? false : '90%'}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
             <Card sx={{ padding: 2 }}>
@@ -133,7 +119,6 @@ export default function UserBusinessReport() {
             </Card>
           </Grid>
 
-          {/* competitor */}
           <Grid item xs={12} md={6}>
             <Card sx={{ padding: 2 }}>
               <Typography variant="h5" textAlign="center" sx={{ mb: 2 }}>
@@ -219,7 +204,7 @@ export default function UserBusinessReport() {
                   </Grid>
                 </Grid>
 
-                {/* general amenities */}
+                
                 <Grid item container xs={12} spacing={2}>
                   <Grid item xs={3}>
                     <Typography variant="h6">General Amenities</Typography>
@@ -235,7 +220,7 @@ export default function UserBusinessReport() {
                   </Grid>
                 </Grid>
 
-                {/* compare bookings */}
+
                 <Grid item container xs={12} spacing={2}>
                   <Grid item xs={3}>
                     <Typography variant="h6">Compare Bookings</Typography>
@@ -248,8 +233,7 @@ export default function UserBusinessReport() {
                     )}
                   </Grid>
                 </Grid>
-
-                {/* compare prices */}
+                
                 <Grid item container xs={12} spacing={2}>
                   <Grid item xs={3}>
                     <Typography variant="h6">Compare Prices</Typography>
@@ -262,7 +246,7 @@ export default function UserBusinessReport() {
                     )}
                   </Grid>
                 </Grid>
-                {/* compare deposit */}
+                
                 <Grid item container xs={12} spacing={2}>
                   <Grid item xs={3}>
                     <Typography variant="h6">Compare Deposit</Typography>
@@ -275,7 +259,7 @@ export default function UserBusinessReport() {
                     )}
                   </Grid>
                 </Grid>
-                {/* compare Agent commission */}
+                
                 <Grid item container xs={12} spacing={2}>
                   <Grid item xs={3}>
                     <Typography variant="h6">Compare Agent Commission</Typography>
@@ -292,7 +276,7 @@ export default function UserBusinessReport() {
             </Card>
           </Grid>
         </Grid>
-      </Container>
+      </Container> */}
     </>
   );
 }

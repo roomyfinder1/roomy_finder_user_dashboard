@@ -9,6 +9,7 @@ import axiosInstance from '../../../../../../utils/axios';
 import { API_URL } from '../../../../../../config-global';
 import Carousel, { CarouselDots } from '../../../../../../components/carousel';
 import Image from '../../../../../../components/image';
+import ImageCard from '../../../../../../components/ImageCard/ImageCard';
 
 // ----------------------------------------------------------------------
 
@@ -22,6 +23,7 @@ Commercials.propTypes = {
 export default function Commercials({ title, description, action, img, ...other }) {
   const theme = useTheme();
   const [commercials, setCommercials] = useState([]);
+  const [images, setImages] = useState([]);
   const getCommercials = async () => {
     try {
       const { data } = await axiosInstance.get(
@@ -29,6 +31,9 @@ export default function Commercials({ title, description, action, img, ...other 
       );
 
       setCommercials(data.data);
+      data.data?.forEach((commercial) => {
+        setImages((prevImg) => [...prevImg, commercial?.images[0]]);
+      });
     } catch (error) {
       console.log(error);
     }
@@ -58,11 +63,12 @@ export default function Commercials({ title, description, action, img, ...other 
 
   return (
     <Card {...other}>
-      <Carousel {...carouselSettings}>
+      <ImageCard imageUrls={images} ratio="4/3" />
+      {/* <Carousel {...carouselSettings}>
         {commercials?.map((item) => (
           <CarouselItem key={item.id} item={item} />
         ))}
-      </Carousel>
+      </Carousel> */}
     </Card>
   );
 }

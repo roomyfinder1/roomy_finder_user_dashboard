@@ -1,42 +1,78 @@
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography, Divider } from '@mui/material';
 import React from 'react';
-
 import PropTypes from 'prop-types';
 import { formatNumberWithTwoDecimals } from '../../../../../utils/formatNumber';
 
 CompareBookings.propTypes = {
-  data: PropTypes.object,
+  bookings: PropTypes.object,
 };
 
-export default function CompareBookings({ data }) {
+export default function CompareBookings({ bookings }) {
   return (
-    <Stack sx={{ border: '1px solid', padding: 2, borderRadius: 2 }}>
-      <Stack direction="row" spacing={1} justifyContent="space-between">
-        <Box sx={{ width: '100%', textAlign: 'center' }}>
-          <Typography>Your total bookings</Typography>
+    <Box
+      sx={{
+        padding: 4,
+        border: '1px solid #ddd',
+        borderRadius: 2,
+        backgroundColor: 'background.paper',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+        textAlign: 'center',
+      }}
+    >
+      <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'text.primary', marginBottom: 2 }}>
+        Booking Overview
+      </Typography>
+
+      <Stack
+        spacing={2}
+        sx={{
+          width: '100%',
+        }}
+      >
+        <Box>
+          <Typography variant="subtitle1" sx={{ fontWeight: 'bold', color: 'text.secondary' }}>
+            Total Bookings
+          </Typography>
+          <Typography
+            variant="h5"
+            sx={{ fontWeight: 'bold', color: 'primary.main', marginTop: 0.5 }}
+          >
+            {bookings?.userBookings || 0}
+          </Typography>
         </Box>
-        <Box sx={{ width: '100%', textAlign: 'center' }}>
-          <Typography>Your average number of bookings per unit</Typography>
-        </Box>
-        <Box sx={{ width: '100%', textAlign: 'center' }}>
-          <Typography>Average number of bookings per unit in the area</Typography>
-        </Box>
-      </Stack>
-      <Stack direction="row" spacing={1} justifyContent="space-around">
-        <Box sx={{ width: '100%', textAlign: 'center' }}>
-          <Typography>{data?.compareBookings?.userBookings || 0}</Typography>
-        </Box>
-        <Box sx={{ width: '100%', textAlign: 'center' }}>
-          <Typography>{data?.compareBookings?.userBookingsPerUnit || 0}</Typography>
-        </Box>
-        <Box sx={{ width: '100%', textAlign: 'center' }}>
-          <Typography>
-            {data?.compareBookings?.bookingsPerUnit
-              ? formatNumberWithTwoDecimals(data?.compareBookings?.bookingsPerUnit)
+        <Divider flexItem />
+        <Box>
+          <Typography variant="subtitle1" sx={{ fontWeight: 'bold', color: 'text.secondary' }}>
+            Avg. Bookings per Unit
+          </Typography>
+          <Typography
+            variant="h5"
+            sx={{ fontWeight: 'bold', color: 'primary.main', marginTop: 0.5 }}
+          >
+            {/* {bookings?.userBookingsPerUnit || 0} */}
+            {bookings?.bookingsPerUnit
+              ? formatNumberWithTwoDecimals(bookings.userBookingsPerUnit)
               : 0}
           </Typography>
         </Box>
+        <Divider flexItem />
+        <Box>
+          <Typography variant="subtitle1" sx={{ fontWeight: 'bold', color: 'text.secondary' }}>
+            Avg. Bookings per Unit (Area)
+          </Typography>
+          <Typography
+            variant="h5"
+            sx={{ fontWeight: 'bold', color: 'primary.main', marginTop: 0.5 }}
+          >
+            {bookings?.bookingsPerUnit ? formatNumberWithTwoDecimals(bookings.bookingsPerUnit) : 0}
+          </Typography>
+        </Box>
       </Stack>
-    </Stack>
+    </Box>
   );
 }

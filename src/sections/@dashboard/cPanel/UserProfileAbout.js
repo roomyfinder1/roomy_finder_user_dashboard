@@ -8,7 +8,8 @@ import { styled } from '@mui/material/styles';
 import { Button, Typography, Stack, Grid, Menu, MenuItem } from '@mui/material';
 // components
 import { PATH_DASHBOARD } from '../../../routes/paths';
-import NewProfileAbout from './NewProfileAbout';
+import NewProfileAbout from '../user/profile/NewProfileAbout';
+
 import Image from '../../../components/image/Image';
 
 // ------------- icons -----------------------------------
@@ -69,7 +70,7 @@ export default function UserProfileAbout({ loading, user, properties }) {
     navigate(PATH_DASHBOARD.c_panel.user_purchases);
   };
   const handleUserPayments = async (type) => {
-    navigate(PATH_DASHBOARD.c_panel.user_payments(user._id, type));
+    navigate(PATH_DASHBOARD.c_panel.user_payments('', type));
   };
 
   const handleUserNotifications = async () => {
@@ -78,7 +79,7 @@ export default function UserProfileAbout({ loading, user, properties }) {
 
   const handleContactUs = () => {
     // Replace the email address, subject, and body with your desired values
-    const emailAddress = 'customersupport1@roomyfinder.com';
+    const emailAddress = 'support@roomyfinder.com';
     const subject = '';
     const body = ',';
 
@@ -114,6 +115,7 @@ export default function UserProfileAbout({ loading, user, properties }) {
       <Grid item xs={12}>
         <NewProfileAbout user={user} />
       </Grid>
+
       <Grid item xs={12} container sx={{ border: '2px solid', borderTop: 'none', padding: 2 }}>
         <Grid item xs={12} sm={4} md={3} sx={{ padding: 2 }}>
           <Button
@@ -151,6 +153,17 @@ export default function UserProfileAbout({ loading, user, properties }) {
             <StyledImage src={freeOffers} />
             <Typography>Services</Typography>
           </Button>
+
+          <Menu
+            anchorEl={anchorServiceEl}
+            open={Boolean(anchorServiceEl)}
+            onClose={handleServiceClose}
+          >
+            <MenuItem onClick={handleUserTenantChat}>Tenant Chat</MenuItem>
+            <MenuItem onClick={handleUserPosts}>Posts</MenuItem>
+            <MenuItem onClick={handleUserMaintenance}>Maintenances</MenuItem>
+            <MenuItem onClick={handleUserBusinessReport}>Business Report</MenuItem>
+          </Menu>
         </Grid>
         <Grid item xs={12} sm={4} md={3} sx={{ padding: 2 }}>
           <Button

@@ -41,7 +41,6 @@ export default function UserProperties() {
   };
 
   const handleDeleteProperty = async () => {
-    console.log(selectedProperty);
     dispatch(deleteUserProperty(selectedProperty._id));
   };
 
@@ -49,10 +48,10 @@ export default function UserProperties() {
     const getPropertiesDetails = () => {
       const units = userProperties.flatMap((property) => property.units);
       const currentDate = new Date();
-      const availableUnits = units.filter(
+      const bookedUnits = units.filter(
         (unit) => !unit.availabilityDate || new Date(unit.availabilityDate) >= currentDate
       );
-      const bookedUnits = units.filter(
+      const availableUnits = units.filter(
         (unit) => unit.availabilityDate && new Date(unit.availabilityDate) < currentDate
       );
 
@@ -174,7 +173,10 @@ export function PropertyCard({ property, onEditClick, onDeleteClick }) {
         </Button>
       </Box>
       <Image sx={{ borderRadius: 1.5 }} alt="property" src={property.images[0]} ratio="3/4" />
-      <Typography sx={{ my: 1 }}>{property.standardCode}</Typography>
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Typography sx={{ my: 1 }}>{property.standardCode}</Typography>
+        <Typography>Views: {property.viewCounts}</Typography>
+      </Stack>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Button
           variant="contained"
@@ -186,7 +188,7 @@ export function PropertyCard({ property, onEditClick, onDeleteClick }) {
         >
           Edit
         </Button>
-        <Typography>Views: {property?.viewCounts || 0}</Typography>
+
         <Button
           variant="contained"
           color="secondary"

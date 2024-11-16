@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Box, Typography } from '@mui/material';
@@ -29,12 +30,12 @@ export default function CustomersMonthlyGrowth({ title, data }) {
           sx={{
             fontSize: 100,
             fontWeight: 'bold',
-            color: data > 0 ? '#00B41D' : 'red',
+            color: data > 0 ? '#00B41D' : data < 0 ? 'red' : '',
             textAlign: 'center',
             alignContent: 'center',
           }}
         >
-          {data > 0 ? <MovingUpIcon /> : <MovingDownIcon />}
+          {data > 0 ? <MovingUpIcon /> : data < 0 ? <MovingDownIcon /> : ''}
           {data}%
         </Typography>
       </Box>

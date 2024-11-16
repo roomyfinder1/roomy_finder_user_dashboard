@@ -92,3 +92,50 @@ export const CPanelUserNotifications = Loadable(
 export const AreaBusinessReport = Loadable(
   lazy(() => import('../pages/dashboard/cPanel/TenantAreaBusinessReport'))
 );
+
+export const CPanelCompitatorAreaBusinessReport = Loadable(
+  lazy(() => import('../pages/dashboard/cPanel/CompitatorAreaBusinessReport'))
+);
+
+export const CPanelTenantAreaBusinessReport = Loadable(
+  lazy(() => import('../pages/dashboard/cPanel/TenantAreaBusinessReport'))
+);
+
+export const LandlordCRM = Loadable(
+  lazy(() => import('../pages/dashboard/cPanel/businessReports/LandlordCrm'))
+);
+export const PropertiesMonthlyIncome = Loadable(
+  lazy(() => import('../pages/dashboard/cPanel/businessReports/PropertiesMonthlyIncome'))
+);
+
+export const LandlordMemberships = Loadable(
+  lazy(() => import('../pages/dashboard/cPanel/businessReports/Memberships'))
+);
+
+export const LandlordPaidToRoomy = Loadable(
+  lazy(() => import('../pages/dashboard/cPanel/businessReports/LandlordPaidToRoomy'))
+);
+
+export const LandlordVatFeePayment = Loadable(
+  lazy(() => import('../pages/dashboard/cPanel/businessReports/LandlordVatFeePayment'))
+);
+
+export const LandlordMaintenancePayments = Loadable(
+  lazy(() => import('../pages/dashboard/cPanel/businessReports/MaintenancePayments'))
+);
+
+export const LandlordPreferredPaymentMethod = Loadable(
+  lazy(() => import('../pages/dashboard/cPanel/businessReports/PreferredPaymentMethod'))
+);
+
+export const LandlordPreferences = Loadable(
+  lazy(() => import('../pages/dashboard/cPanel/businessReports/LandlordPreferences'))
+);
+
+export const LandlordChatDetails = Loadable(
+  lazy(() => import('../pages/dashboard/cPanel/businessReports/LandlordChatDetails'))
+);
+
+export const MatchedTenants = Loadable(
+  lazy(() => import('../pages/dashboard/cPanel/businessReports/MatchedTenants'))
+);

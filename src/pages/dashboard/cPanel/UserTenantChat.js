@@ -25,6 +25,7 @@ import CustomBreadcrumbs from '../../../components/custom-breadcrumbs';
 import { useSettingsContext } from '../../../components/settings';
 import {
   useTable,
+  getComparator,
   emptyRows,
   TableNoData,
   TableEmptyRows,
@@ -32,11 +33,12 @@ import {
   TableSelectedAction,
   TablePaginationCustom,
 } from '../../../components/table';
+// sections
 
 // redux
 import { useSelector, useDispatch } from '../../../redux/store';
 import { getUserTenantChat } from '../../../redux/slices/userCPanel';
-import { LoadingSkeleton } from '../../../components/loading-screen';
+import { LoadingSkeleton } from '../../../sections/@dashboard/general/app';
 import { fDate } from '../../../utils/formatTime';
 
 // ----------------------------------------------------------------------

@@ -33,7 +33,7 @@ import Scrollbar from '../../../components/scrollbar';
 import { getUnitBookings } from '../../../redux/slices/userCPanel';
 import { useDispatch, useSelector } from '../../../redux/store';
 import { fDateTime } from '../../../utils/formatTime';
-import UnitBookingCalenderWithLineStrikeOut from '../../../sections/@dashboard/cPanel/UnitBookingsCalender';
+import UnitBookingCalenderWithLineStrikeOut from '../../../sections/@dashboard/properties/units/UnitBookingCalenderLineStrikeOut';
 import { LoadingSection } from '../../../components/loading';
 
 const TABLE_HEAD = [

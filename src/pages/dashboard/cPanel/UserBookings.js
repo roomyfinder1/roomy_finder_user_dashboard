@@ -80,7 +80,7 @@ export default function UserBookings() {
   }, [dispatch, userId]);
 
   const handleNavigateToBookingHistory = () => {
-    navigate(PATH_DASHBOARD.c_panel.user_booking_history);
+    navigate(PATH_DASHBOARD.c_panel.user_booking_history(userId));
   };
 
   return (

@@ -7,10 +7,13 @@ import { Grid, Container, Stack, Button, CardContent, Card, Typography } from '@
 // components
 import { useSettingsContext } from '../../../components/settings';
 // sections
-import ProductDetailsSummary from '../../../sections/@dashboard/cPanel/ProductDetailsSummary';
-import ProductDetailsCarousel from '../../../sections/@dashboard/cPanel/ProductDetailsCarousel';
+import {
+  ProductDetailsSummary,
+  ProductDetailsCarousel,
+} from '../../../sections/@dashboard/properties/details';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 import { useDispatch, useSelector } from '../../../redux/store';
+import { useSnackbar } from '../../../components/snackbar';
 import { deleteUserProperty, getPostDetails } from '../../../redux/slices/userCPanel';
 import { SkeletonProductDetails } from '../../../components/skeleton';
 
@@ -23,6 +26,7 @@ export default function PropertyDetailsPage() {
   const { userPost, isLoading, error } = useSelector((store) => store.userCPanel);
 
   const { postId } = useParams();
+  const { enqueueSnackbar } = useSnackbar();
   const { themeStretch } = useSettingsContext();
 
   const { property } = userPost;

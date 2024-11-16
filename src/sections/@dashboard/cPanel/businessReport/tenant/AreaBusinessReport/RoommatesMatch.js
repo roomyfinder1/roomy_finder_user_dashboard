@@ -44,7 +44,9 @@ export default function RoommatesMatch({ title, area, budget }) {
             Male
           </Typography>
 
-          <Typography textAlign="center">{users?.maleUsers?.length || 0}</Typography>
+          <Typography textAlign="center" variant="h6">
+            {users?.maleUsers?.length || 0}
+          </Typography>
         </Grid>
 
         <Grid item xs={6}>
@@ -55,7 +57,9 @@ export default function RoommatesMatch({ title, area, budget }) {
             Female
           </Typography>
 
-          <Typography textAlign="center">{users?.femaleUsers?.length || 0}</Typography>
+          <Typography textAlign="center" variant="h6">
+            {users?.femaleUsers?.length || 0}
+          </Typography>
         </Grid>
 
         <Button>Get Details</Button>

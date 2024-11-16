@@ -33,8 +33,7 @@ export default function WithdrawAmountPopover({ open, onClose, userId }) {
     try {
       setStripeConnectLoading(true);
       const response = await axiosInstance.post(
-        `${API_URL}/payout/stripe/connected-account/${userId}`,
-        { user_login: true }
+        `${API_URL}/payout/stripe/connected-account/${userId}`
       );
       window.location.href = response.data.accountLink;
     } catch (error) {

@@ -24,26 +24,30 @@ import FormProvider, {
 
 import { storage } from '../../../firebase/index';
 import axiosInstance from '../../../utils/axios';
+import { useDispatch } from '../../../redux/store';
 import { API_URL } from '../../../config-global';
+import { getAll_Property_Date_Wise, getProperties } from '../../../redux/slices/Properties';
 import Iconify from '../../../components/iconify';
 
 // ----------------------------------------------------------------------
 
 // Define your list of amenities
 const amenitiesList = [
-  'wifi',
-  'ac',
-  'tv',
-  'balcony',
-  'gym',
-  'kitchen appliances',
-  'swimming pool',
-  'parking lot',
-  'cleaning included',
-  'washer',
-  'near grocery',
-  'near pharmacy',
-  'close to metro',
+  'Own bathroom',
+  'Close to bus station',
+  'Close to metro',
+  'WIFI',
+  'TV',
+  'AC',
+  'Balcony',
+  'Gym',
+  'Kitchen Appliances',
+  'Swimming Pool',
+  'Parking Lot',
+  'Cleaning Included',
+  'Washer',
+  'Near Grocery',
+  'Near Pharmacy',
 ];
 
 const Gender = ['Male', 'Female', 'Mix'];
@@ -88,6 +92,8 @@ EditUserPropertyForm.propTypes = {
 
 export default function EditUserPropertyForm({ isEdit, currentProduct, userData }) {
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -214,17 +220,13 @@ export default function EditUserPropertyForm({ isEdit, currentProduct, userData 
       const obj = {
         type: values.type,
         amenities: values.amenities,
-        preferedRentType: values.preferedRentType,
-        monthlyPrice: Number(values.monthlyPrice),
-        weeklyPrice: Number(values.weeklyPrice),
-        dailyPrice: Number(values.dailyPrice),
-        deposit: values.deposit,
         images: values.images,
         videos: values.videos,
         isBookable: values.isBookable,
         depositPrice: Number(values.depositPrice),
         description: values.description,
         units: values.units,
+        currency: 'AED',
         address,
         preferences,
       };
@@ -238,6 +240,19 @@ export default function EditUserPropertyForm({ isEdit, currentProduct, userData 
         await axiosInstance.post(`${API_URL}/property/post-property`, obj, {
           headers: { Authorization: landlordToken },
         });
+      } else {
+        try {
+          const response = await axiosInstance.put(
+            `${API_URL}/property/edit-property/${currentProduct._id}`,
+            obj
+          );
+          if (response.status === 200) {
+            await dispatch(getProperties());
+            await dispatch(getAll_Property_Date_Wise());
+          }
+        } catch (error) {
+          console.log(error);
+        }
       }
 
       reset();
@@ -348,6 +363,17 @@ export default function EditUserPropertyForm({ isEdit, currentProduct, userData 
                 <RHFTextField name="buildingName" label="Tower Name" />
                 <RHFTextField name="appartmentNumber" label="Apartment Number" />
                 <RHFTextField name="floorNumber" label="Floor Number" />
+
+                <RHFSelect native name="type" label="Property Type" placeholder="Property Type">
+                  <option value="" />
+                  {['Bed Space', 'Partition', 'Regular Room', 'Master Room', 'Studio'].map(
+                    (value, id) => (
+                      <option key={id} value={value}>
+                        {value}
+                      </option>
+                    )
+                  )}
+                </RHFSelect>
               </Box>
             </Card>
 

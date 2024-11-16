@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 // @mui
 import { Box, Typography } from '@mui/material';
 import moment from 'moment';
-import UniqueCode from './UniqueCode';
+import { UniqueCode } from '../../general/app';
+import { fCurrency } from '../../../../utils/formatNumber';
 
 // ----------------------------------------------------------------------
 
@@ -16,9 +17,7 @@ ProductDetailsSummary.propTypes = {
 export default function ProductDetailsSummary({ product, ...other }) {
   const {
     createdAt,
-    depositPrice,
     budget,
-    posterType,
     type,
     action,
     units,
@@ -26,6 +25,11 @@ export default function ProductDetailsSummary({ product, ...other }) {
     preferences,
     amenities,
     viewCounts,
+    isPremium,
+    monthlyPrice,
+    weeklyPrice,
+    dailyPrice,
+    currency,
   } = product;
 
   return (
@@ -40,19 +44,55 @@ export default function ProductDetailsSummary({ product, ...other }) {
             <Typography variant="body2">Id Code</Typography>
             <Box>{<UniqueCode code={product.standardCode} /> || 'N/A'}</Box>
           </Box>
+
           {action && (
             <Box sx={{ mx: 2, my: 1, display: 'flex', justifyContent: 'space-between' }}>
-              <Typography variant="body2">Budget</Typography>
-              <Typography variant="body2">{budget || 'N/A'}</Typography>
+              <Typography variant="body2">Type</Typography>
+              <Box>{<UniqueCode code={product.action} /> || 'N/A'}</Box>
             </Box>
           )}
+          {action &&
+            (action === 'NEED ROOM' ? (
+              <Box sx={{ mx: 2, my: 1, display: 'flex', justifyContent: 'space-between' }}>
+                <Typography variant="body2">Budget</Typography>
+                <Typography variant="body2">{budget || 'N/A'}</Typography>
+              </Box>
+            ) : (
+              <>
+                <Box sx={{ mx: 2, my: 1, display: 'flex', justifyContent: 'space-between' }}>
+                  <Typography variant="body2">Monthly Price</Typography>
+                  <Typography variant="body2">
+                    {monthlyPrice ? `${fCurrency(monthlyPrice)} ${currency}` : 'N/A'}
+                  </Typography>
+                </Box>
+                <Box sx={{ mx: 2, my: 1, display: 'flex', justifyContent: 'space-between' }}>
+                  <Typography variant="body2">Weekly Price</Typography>
+                  <Typography variant="body2">
+                    {weeklyPrice ? `${fCurrency(weeklyPrice)} ${currency}` : 'N/A'}
+                  </Typography>
+                </Box>
+                <Box sx={{ mx: 2, my: 1, display: 'flex', justifyContent: 'space-between' }}>
+                  <Typography variant="body2">Daily Price</Typography>
+                  <Typography variant="body2">
+                    {dailyPrice ? `${fCurrency(dailyPrice)} ${currency}` : 'N/A'}
+                  </Typography>
+                </Box>
+              </>
+            ))}
 
           <Box sx={{ mx: 2, my: 1, display: 'flex', justifyContent: 'space-between' }}>
             <Typography variant="body2">Type</Typography>
             <Typography variant="body2">{type || 'N/A'}</Typography>
           </Box>
 
-          {!action && (
+          <Box sx={{ mx: 2, my: 1, display: 'flex', justifyContent: 'space-between' }}>
+            <Typography variant="body2">Post type: </Typography>
+            <Typography variant="body2">
+              {isPremium ? 'Premium' : 'Non Premium' || 'N/A'}
+            </Typography>
+          </Box>
+
+          {/* {!action && (
             <Box>
               <Box sx={{ mx: 2, my: 1, display: 'flex', justifyContent: 'space-between' }}>
                 <Typography variant="body2">Poster Type</Typography>
@@ -63,7 +103,7 @@ export default function ProductDetailsSummary({ product, ...other }) {
                 <Typography variant="body2">{depositPrice || 'N/A'}</Typography>
               </Box>
             </Box>
-          )}
+          )} */}
 
           <Box sx={{ mx: 2, my: 1, display: 'flex', justifyContent: 'space-between' }}>
             <Typography variant="body2">Posted On</Typography>
@@ -79,7 +119,7 @@ export default function ProductDetailsSummary({ product, ...other }) {
           )}
           <Box sx={{ mx: 2, my: 1, display: 'flex', justifyContent: 'space-between' }}>
             <Typography variant="body2">Views</Typography>
-            <Typography variant="body2">{viewCounts || 'N/A'} users</Typography>
+            <Typography variant="h6">{viewCounts || 'N/A'} users</Typography>
           </Box>
 
           <Typography>{!action ? 'Property Address' : 'Tenant Address'}</Typography>

@@ -33,7 +33,7 @@ import {
   TableSkeleton,
 } from '../../../components/table';
 // sections
-import { filterUser } from './UserMemberships';
+import { filterUser } from '../../../sections/@dashboard/general/app/filterUser';
 
 // redux
 import { useSelector, useDispatch } from '../../../redux/store';
@@ -197,7 +197,9 @@ export function MaintenanceTableRow({ row }) {
       </TableCell>
       <TableCell sx={{ textAlign: 'center' }}>
         <Button
-          onClick={() => navigate(PATH_DASHBOARD.c_panel.user_maintenance_details, { state: row })}
+          onClick={() =>
+            navigate(PATH_DASHBOARD.c_panel.user_maintenance_details(row._id), { state: row })
+          }
         >
           Details
         </Button>

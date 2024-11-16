@@ -43,6 +43,18 @@ import {
   CPanelUserEditProperty,
   CPanelUserViewPost,
   AreaBusinessReport,
+  CPanelTenantAreaBusinessReport,
+  CPanelCompitatorAreaBusinessReport,
+  LandlordCRM,
+  PropertiesMonthlyIncome,
+  LandlordMemberships,
+  LandlordPaidToRoomy,
+  LandlordVatFeePayment,
+  LandlordMaintenancePayments,
+  LandlordPreferences,
+  LandlordPreferredPaymentMethod,
+  LandlordChatDetails,
+  MatchedTenants,
 } from './elements';
 
 // ----------------------------------------------------------------------
@@ -285,6 +297,104 @@ export default function Router() {
           element: (
             <AuthGuard allowedUserTypes={[...onlyForLandlord]}>
               <AreaBusinessReport />
+            </AuthGuard>
+          ),
+        },
+        {
+          path: 'landlord_crm/:userId',
+          element: (
+            <AuthGuard allowedUserTypes={[...onlyForLandlord]}>
+              <LandlordCRM />
+            </AuthGuard>
+          ),
+        },
+        {
+          path: 'properties_monthly_income/:userId',
+          element: (
+            <AuthGuard allowedUserTypes={[...onlyForLandlord]}>
+              <PropertiesMonthlyIncome />
+            </AuthGuard>
+          ),
+        },
+        {
+          path: 'landlord_memberships/:userId',
+          element: (
+            <AuthGuard allowedUserTypes={[...onlyForLandlord]}>
+              <LandlordMemberships />
+            </AuthGuard>
+          ),
+        },
+
+        {
+          path: 'landlord_paid_to_roomy/:userId',
+          element: (
+            <AuthGuard allowedUserTypes={[...onlyForLandlord]}>
+              <LandlordPaidToRoomy />
+            </AuthGuard>
+          ),
+        },
+        {
+          path: 'landlord_vat_fee_payment/:userId',
+          element: (
+            <AuthGuard allowedUserTypes={[...onlyForLandlord]}>
+              <LandlordVatFeePayment />
+            </AuthGuard>
+          ),
+        },
+        {
+          path: 'landlord_maintenance_payments/:userId',
+          element: (
+            <AuthGuard allowedUserTypes={[...onlyForLandlord]}>
+              <LandlordMaintenancePayments />
+            </AuthGuard>
+          ),
+        },
+        {
+          path: 'landlord_preferences/:userId',
+          element: (
+            <AuthGuard allowedUserTypes={[...onlyForLandlord]}>
+              <LandlordPreferences />
+            </AuthGuard>
+          ),
+        },
+        {
+          path: 'landlord_preferred_payment_method/:userId',
+          element: (
+            <AuthGuard allowedUserTypes={[...onlyForLandlord]}>
+              <LandlordPreferredPaymentMethod />
+            </AuthGuard>
+          ),
+        },
+        {
+          path: 'landlord_chat_details/:userId',
+          element: (
+            <AuthGuard allowedUserTypes={[...onlyForLandlord]}>
+              <LandlordChatDetails />
+            </AuthGuard>
+          ),
+        },
+        {
+          path: 'matched_tenants/:userId',
+          element: (
+            <AuthGuard allowedUserTypes={[...onlyForLandlord]}>
+              <MatchedTenants />
+            </AuthGuard>
+          ),
+        },
+
+        {
+          path: 'tenant_area_business_report/:userId/:area',
+          element: (
+            <AuthGuard allowedUserTypes={[...onlyForLandlord]}>
+              <CPanelTenantAreaBusinessReport />
+            </AuthGuard>
+          ),
+        },
+        {
+          path: 'compitator_area_business_report/:userId/:area',
+          element: (
+            <AuthGuard allowedUserTypes={[...onlyForLandlord]}>
+              <CPanelCompitatorAreaBusinessReport />
             </AuthGuard>
           ),
         },

@@ -1,6 +1,6 @@
 import { Container, Grid, MenuItem, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -11,7 +11,47 @@ import { API_URL } from '../../../config-global';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 
 export default function UserBusinessReportV2() {
-  const { userId } = useParams();
+  const user = 'user';
+
+  const landlordSections = [
+    {
+      name: 'Properties income',
+      url: PATH_DASHBOARD.c_panel.user_business_report_landlord(user),
+    },
+    {
+      name: 'Properties Monthly Income',
+      url: PATH_DASHBOARD.c_panel.user_business_report_properties_monthly_income(user),
+    },
+    {
+      name: 'Memberships',
+      url: PATH_DASHBOARD.c_panel.user_business_report_landlord_memberships(user),
+    },
+    {
+      name: 'Paid to Roomy',
+      url: PATH_DASHBOARD.c_panel.user_business_report_landlord_paid_to_roomy(user),
+    },
+    {
+      name: 'VAT',
+      url: PATH_DASHBOARD.c_panel.user_business_report_landlord_vat_fee_payment(user),
+    },
+    {
+      name: 'Maintenance Payments',
+      url: PATH_DASHBOARD.c_panel.user_business_report_landlord_maintenance_payments(user),
+    },
+
+    {
+      name: 'Preferred Payments Method',
+      url: PATH_DASHBOARD.c_panel.user_business_report_landlord_preferred_payment_method(user),
+    },
+    {
+      name: 'Preferences',
+      url: PATH_DASHBOARD.c_panel.user_business_report_landlord_preferences(user),
+    },
+    {
+      name: 'Chats',
+      url: PATH_DASHBOARD.c_panel.user_business_report_landlord_chat_details(user),
+    },
+  ];
 
   const navigate = useNavigate();
 
@@ -32,11 +72,19 @@ export default function UserBusinessReportV2() {
   };
 
   useEffect(() => {
-    getAreas(userId);
-  }, [userId]);
+    getAreas('user');
+  }, [user]);
 
   const handleNavigateToReport = (area) => {
-    navigate(PATH_DASHBOARD.c_panel.area_business_report(area));
+    navigate(PATH_DASHBOARD.c_panel.tenant_area_business_report('user', area));
+  };
+
+  const handleNavigateToCompitatorReport = (area) => {
+    navigate(PATH_DASHBOARD.c_panel.compitator_area_business_report('user', area));
+  };
+
+  const handleNavigateToReport2 = (url) => {
+    navigate(url);
   };
 
   return (
@@ -48,12 +96,37 @@ export default function UserBusinessReportV2() {
           </Typography>
         </Grid>
 
+        {/* <Grid item xs={12}>
+          <Typography
+            sx={{ cursor: 'pointer' }}
+            onClick={() => navigate(PATH_DASHBOARD.c_panel.user_business_report_landlord(userId))}
+          >
+            Landlord CRM
+          </Typography>
+        </Grid> */}
+
         <Grid item xs={12}>
           <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1bh-content"
               id="panel1bh-header"
+            >
+              <Typography sx={{ width: '33%', flexShrink: 0 }}>Landlord CRM</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              {landlordSections.map((section) => (
+                <MenuItem key={section.name} onClick={() => handleNavigateToReport2(section.url)}>
+                  <Typography>{section.name}</Typography>
+                </MenuItem>
+              ))}
+            </AccordionDetails>
+          </Accordion>
+          <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2bh-content"
+              id="panel2bh-header"
             >
               <Typography sx={{ width: '33%', flexShrink: 0 }}>Tenant</Typography>
             </AccordionSummary>
@@ -67,17 +140,20 @@ export default function UserBusinessReportV2() {
           </Accordion>
 
           {/* competitor */}
-          <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+          <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1bh-content"
-              id="panel1bh-header"
+              aria-controls="panel3bh-content"
+              id="panel3bh-header"
             >
               <Typography sx={{ width: '33%', flexShrink: 0 }}>Competitor</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>Duabi</Typography>
-              <Typography>Al Barsha</Typography>
+              {areas.map((area) => (
+                <MenuItem key={area} onClick={() => handleNavigateToCompitatorReport(area)}>
+                  <Typography>{area}</Typography>
+                </MenuItem>
+              ))}
             </AccordionDetails>
           </Accordion>
         </Grid>

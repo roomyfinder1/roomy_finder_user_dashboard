@@ -4,11 +4,11 @@ import { useState, useRef, useEffect } from 'react';
 import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
 // utils
-import { bgGradient } from '../../../utils/cssStyles';
+import { bgGradient } from '../../../../utils/cssStyles';
 // components
-import Image from '../../../components/image';
-import Lightbox from '../../../components/lightbox';
-import Carousel, { CarouselArrowIndex } from '../../../components/carousel';
+import Image from '../../../../components/image';
+import Lightbox from '../../../../components/lightbox';
+import Carousel, { CarouselArrowIndex } from '../../../../components/carousel';
 
 // ----------------------------------------------------------------------
 
@@ -84,10 +84,10 @@ export default function ProductDetailsCarousel({ product }) {
 
   const [selectedImage, setSelectedImage] = useState(-1);
 
-  const imagesLightbox = product?.images.map((img) => ({ src: img }));
+  const imagesLightbox = product?.files.map((img) => ({ src: img.thumbnail || img.url }));
 
   const handleOpenLightbox = (imageUrl) => {
-    const imageIndex = imagesLightbox.findIndex((image) => image.src === imageUrl);
+    const imageIndex = imagesLightbox.findIndex((image) => image.url === imageUrl);
     setSelectedImage(imageIndex);
   };
 
@@ -113,7 +113,7 @@ export default function ProductDetailsCarousel({ product }) {
     focusOnSelect: true,
     variableWidth: true,
     centerPadding: '0px',
-    slidesToShow: product?.images?.length > 3 ? 3 : product?.images?.length,
+    slidesToShow: product?.files?.length > 3 ? 3 : product?.files?.length,
   };
 
   useEffect(() => {
@@ -140,21 +140,23 @@ export default function ProductDetailsCarousel({ product }) {
   const renderLargeImg = (
     <Box sx={{ mb: 3, borderRadius: 2, overflow: 'hidden', position: 'relative' }}>
       <Carousel {...carouselSettings1} asNavFor={nav2} ref={carousel1}>
-        {product?.images?.map((img) => (
-          <Image
-            key={img}
-            alt="product"
-            src={img}
-            ratio="1/1"
-            onClick={() => handleOpenLightbox(img)}
-            sx={{ cursor: 'zoom-in' }}
-          />
-        ))}
+        {product?.files
+          ?.filter((image) => image?.mimeType?.includes('image'))
+          ?.map((img) => (
+            <Image
+              key={img}
+              alt="product"
+              src={img.thumbnail || img.url}
+              ratio="1/1"
+              onClick={() => handleOpenLightbox(img.url)}
+              sx={{ cursor: 'zoom-in' }}
+            />
+          ))}
       </Carousel>
 
       <CarouselArrowIndex
         index={currentIndex}
-        total={product?.images?.length}
+        total={product?.files?.length}
         onNext={handleNext}
         onPrevious={handlePrev}
       />
@@ -162,14 +164,14 @@ export default function ProductDetailsCarousel({ product }) {
   );
 
   const renderThumbnails = (
-    <StyledThumbnailsContainer length={product?.images.length}>
+    <StyledThumbnailsContainer length={product?.files.length}>
       <Carousel {...carouselSettings2} asNavFor={nav1} ref={carousel2}>
-        {product?.images.map((img, index) => (
+        {product?.files?.map((img, index) => (
           <Image
             key={img}
             disabledEffect
             alt="thumbnail"
-            src={img}
+            src={img.thumbnail || img.url}
             sx={{
               width: THUMB_SIZE,
               height: THUMB_SIZE,

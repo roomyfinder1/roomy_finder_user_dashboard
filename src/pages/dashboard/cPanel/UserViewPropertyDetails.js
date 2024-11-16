@@ -14,8 +14,7 @@ import { getPropertyDetails } from '../../../redux/slices/userCPanel';
 
 // components
 import { useSettingsContext } from '../../../components/settings';
-import BookingBookedRoom from '../../../sections/@dashboard/cPanel/BookingBookedRoom';
-import AppCurrentDownload from '../../../sections/@dashboard/cPanel/AppCurrentDownloads';
+import { BookingBookedRoom, AppCurrentDownload } from '../../../sections/@dashboard/general/app';
 import { CardLoading, CardStackLoading, LoadingSection } from '../../../components/loading';
 import { LiveTime } from '../../../components/time';
 import { PATH_DASHBOARD } from '../../../routes/paths';
@@ -54,10 +53,10 @@ export default function UserViewPropertyDetails() {
   const unitsData = (property) => {
     const { units } = property;
     const currentDate = new Date();
-    const availableUnits = units?.filter(
+    const bookedUnits = units?.filter(
       (unit) => !unit?.availabilityDate || new Date(unit?.availabilityDate) >= currentDate
     );
-    const bookedUnits = units?.filter(
+    const availableUnits = units?.filter(
       (unit) => unit?.availabilityDate && new Date(unit?.availabilityDate) < currentDate
     );
     const bedSpace = units?.filter((unit) => unit.type === 'Bed Space')?.length;
@@ -145,7 +144,7 @@ export default function UserViewPropertyDetails() {
             <Grid item container xs={12} md={4} spacing={3} sx={{ height: 440 }}>
               <Grid item container xs={12} md={8} spacing={3}>
                 <Grid item xs={6}>
-                  <Card sx={{ padding: 2, background: '#BD02FE', height: '100%' }}>
+                  <Card sx={{ padding: 2, background: '#BD02FE' }}>
                     <Typography textAlign="center">Bed Space</Typography>
                     <Typography variant="h5" textAlign="center">
                       {unitsDetails.bedSpace || 0}
@@ -153,7 +152,7 @@ export default function UserViewPropertyDetails() {
                   </Card>
                 </Grid>
                 <Grid item xs={6}>
-                  <Card sx={{ padding: 2, background: 'orange', height: '100%' }}>
+                  <Card sx={{ padding: 2, background: 'orange' }}>
                     <Typography textAlign="center">Master Room</Typography>
                     <Typography variant="h5" textAlign="center">
                       {unitsDetails.masterRoom || 0}
@@ -161,7 +160,7 @@ export default function UserViewPropertyDetails() {
                   </Card>
                 </Grid>
                 <Grid item xs={6}>
-                  <Card sx={{ padding: 2, background: 'orange', height: '100%' }}>
+                  <Card sx={{ padding: 2, background: 'orange' }}>
                     <Typography textAlign="center">Room</Typography>
                     <Typography variant="h5" textAlign="center">
                       {unitsDetails.room || 0}
@@ -169,7 +168,7 @@ export default function UserViewPropertyDetails() {
                   </Card>
                 </Grid>
                 <Grid item xs={6}>
-                  <Card sx={{ padding: 2, background: '#BD02FE', height: '100%' }}>
+                  <Card sx={{ padding: 2, background: '#BD02FE' }}>
                     <Typography textAlign="center">Partition</Typography>
                     <Typography variant="h5" textAlign="center">
                       {unitsDetails.partition || 0}
@@ -267,7 +266,7 @@ export default function UserViewPropertyDetails() {
                     <UnitDetailsCard
                       unit={unit}
                       property={propertyDetails?.property}
-                      key={unit._id}
+                      key={unit?._id}
                     />
                   ))}
                 </Stack>

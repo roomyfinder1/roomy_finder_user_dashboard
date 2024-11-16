@@ -16,10 +16,9 @@ import {
   TableRow,
   Button,
 } from '@mui/material';
-import { LoadingSkeleton } from '../../../components/loading-screen';
 import { useSettingsContext } from '../../../components/settings';
 import { useDispatch, useSelector } from '../../../redux/store';
-import { getUserPosts, getUserMembershipPosts } from '../../../redux/slices/userCPanel';
+import { getUserMembershipPosts, getUserPosts } from '../../../redux/slices/userCPanel';
 import { LoadingSection } from '../../../components/loading';
 import {
   TableEmptyRows,
@@ -30,7 +29,7 @@ import {
   useTable,
 } from '../../../components/table';
 import Scrollbar from '../../../components/scrollbar';
-
+import { LoadingSkeleton } from '../../../sections/@dashboard/general/app';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 
 const defaultValues = {

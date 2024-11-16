@@ -5,9 +5,9 @@ import { useTheme, styled } from '@mui/material/styles';
 import { Card, CardHeader } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 // utils
-import { fNumber } from '../../../utils/formatNumber';
+import { fNumber } from '../../../../utils/formatNumber';
 // components
-import Chart, { useChart } from '../../../components/chart';
+import Chart, { useChart } from '../../../../components/chart';
 
 // ----------------------------------------------------------------------
 

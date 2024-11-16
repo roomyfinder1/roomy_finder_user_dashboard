@@ -20,7 +20,7 @@ function UniqueCode({ code }) {
           <Typography sx={{ display: 'inline' }}>{code}</Typography>
         </Box>
       ) : (
-        '-'
+        'N/A'
       )}
     </>
   );

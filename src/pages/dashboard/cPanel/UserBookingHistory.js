@@ -31,10 +31,9 @@ import {
 // redux
 import { useSelector, useDispatch } from '../../../redux/store';
 import { getUserBookings } from '../../../redux/slices/userCPanel';
+import { LoadingSkeleton, UniqueCode } from '../../../sections/@dashboard/general/app';
 import { fDate, fDateTime } from '../../../utils/formatTime';
 import { fCurrency } from '../../../utils/formatNumber';
-import { LoadingSkeleton } from '../../../components/loading-screen';
-
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
@@ -155,7 +154,9 @@ export function BookingHistoryRow({ row }) {
   } = row;
   return (
     <TableRow hover>
-      <TableCell>{standardCode || 'N/A'}</TableCell>
+      <TableCell>
+        <UniqueCode code={standardCode} />
+      </TableCell>
       <TableCell sx={{ whiteSpace: 'nowrap' }}>{fDateTime(createdAt) || 'N/A'}</TableCell>
       <TableCell sx={{ whiteSpace: 'nowrap' }}>{fDate(checkIn) || 'N/A'}</TableCell>
       <TableCell sx={{ whiteSpace: 'nowrap' }}>{fDate(checkOut) || 'N/A'}</TableCell>

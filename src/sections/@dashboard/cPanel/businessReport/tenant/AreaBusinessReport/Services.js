@@ -4,11 +4,16 @@ import { useState } from 'react';
 // @mui
 import { useTheme, styled } from '@mui/material/styles';
 import { Box, Card, Button, CardContent, Typography, Select, MenuItem } from '@mui/material';
+
+// icons
+import TenantChat from '@mui/icons-material/Telegram';
+import PremiumAd from '@mui/icons-material/WorkspacePremium';
+import BookingCalendar from '@mui/icons-material/CalendarMonth';
+import Analytics from '@mui/icons-material/QueryStats';
 // components
-import Image from '../../../../../../components/image/Image';
 import Carousel, { CarouselDots } from '../../../../../../components/carousel';
 import axiosInstance from '../../../../../../utils/axios';
-import { API_URL, HOST_API_KEY, LOCAL_API_URL } from '../../../../../../config-global';
+import { API_URL, HOST_API_KEY } from '../../../../../../config-global';
 import { useSnackbar } from '../../../../../../components/snackbar';
 
 // ----------------------------------------------------------------------
@@ -35,11 +40,10 @@ Services.propTypes = {
 export default function Services({ ...other }) {
   const theme = useTheme();
   const list = [
-    { id: 1, name: 'TENANT CHAT' },
-    { id: 2, name: 'BOOKING CALENDAR' },
-    { id: 3, name: 'PREMIUM AD' },
-    { id: 4, name: 'BOOKING CALENDAR' },
-    { id: 5, name: 'ANALYTICS' },
+    { id: 1, name: 'TENANT CHAT', icon: <TenantChat fontSize="large" color="warning" /> },
+    { id: 2, name: 'BOOKING CALENDAR', icon: <BookingCalendar fontSize="large" color="warning" /> },
+    { id: 3, name: 'PREMIUM AD', icon: <PremiumAd fontSize="large" color="warning" /> },
+    { id: 4, name: 'ANALYTICS', icon: <Analytics fontSize="large" color="warning" /> },
   ];
 
   const carouselSettings = {
@@ -54,14 +58,13 @@ export default function Services({ ...other }) {
       sx: {
         right: 0,
         left: 0,
-        bottom: 24,
         position: 'absolute',
       },
     }),
   };
 
   return (
-    <Card {...other}>
+    <Card sx={{ padding: 2, border: '1px solid #DADADA', height: '100%' }}>
       <Carousel {...carouselSettings}>
         {list.map((item) => (
           <CarouselItem key={item.id} item={item} />
@@ -78,7 +81,7 @@ CarouselItem.propTypes = {
 };
 
 function CarouselItem({ item }) {
-  const { image, name } = item;
+  const { name, icon } = item;
   const { enqueueSnackbar } = useSnackbar();
   const [selectedWeek, setSelectedWeek] = useState(1);
 
@@ -88,12 +91,12 @@ function CarouselItem({ item }) {
     try {
       enqueueSnackbar('Payment Processing');
       const { data } = await axiosInstance.post(
-        `${LOCAL_API_URL}/roomy_pro/purchase_roomy_pro/${userId}`,
+        `${API_URL}/roomy_pro/purchase_roomy_pro/${userId}`,
         {
           type: name,
           numberOfWeeks: selectedWeek,
-          successUrl: `${HOST_API_KEY}/dashboard/c_panel/payment_success/${userId}`,
-          cancelUrl: `${HOST_API_KEY}/dashboard/c_panel/payment_cancelled/${userId}`,
+          successUrl: `${HOST_API_KEY}dashboard/c_panel/payment_success/${userId}`,
+          cancelUrl: `${HOST_API_KEY}dashboard/c_panel/payment_cancelled/${userId}`,
         }
       );
 
@@ -108,49 +111,31 @@ function CarouselItem({ item }) {
   };
 
   return (
-    <Card sx={{ padding: 2, border: '1px solid #DADADA', height: '100%' }}>
-      <Box sx={{ position: 'relative' }}>
-        <CardContent
-          sx={{
-            left: 0,
-            bottom: 0,
-            zIndex: 9,
-            maxWidth: '80%',
-            position: 'absolute',
-            // color: 'common.white',
-          }}
-        >
+    <Box>
+      <CardContent>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant="overline" sx={{ opacity: 0.48 }}>
             New
           </Typography>
+          <div>{icon}</div>
+        </Box>
 
-          <Box>
-            <Typography noWrap variant="h5" sx={{ mt: 1, mb: 3 }}>
-              {name}
-            </Typography>
+        <Box sx={{ zIndex: 566 }}>
+          <Typography noWrap variant="h5" sx={{ mt: 1, mb: 3 }}>
+            {name}
+          </Typography>
 
-            <Select size="small" value={selectedWeek} onChange={handleWeekSelect}>
-              <MenuItem value="1">1 Week</MenuItem>
-              <MenuItem value="2">2 Weeks</MenuItem>
-              <MenuItem value="4">4 Weeks</MenuItem>
-            </Select>
-          </Box>
+          <Select size="small" value={selectedWeek} onChange={handleWeekSelect}>
+            <MenuItem value="1">1 Week</MenuItem>
+            <MenuItem value="2">2 Weeks</MenuItem>
+            <MenuItem value="4">4 Weeks</MenuItem>
+          </Select>
+        </Box>
 
-          <Button sx={{ zIndex: 55 }} onClick={purchaseRoomyPro}>
-            Buy Now
-          </Button>
-        </CardContent>
-
-        <StyledOverlay />
-
-        <Image
-          alt={name}
-          src={image}
-          sx={{
-            height: { xs: 200, xl: 250 },
-          }}
-        />
-      </Box>
-    </Card>
+        <Button sx={{ zIndex: 55 }} onClick={purchaseRoomyPro}>
+          Buy Now
+        </Button>
+      </CardContent>
+    </Box>
   );
 }
